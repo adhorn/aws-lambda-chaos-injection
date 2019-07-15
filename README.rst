@@ -10,15 +10,17 @@ and a Class to add `delay` to any 3rd party dependencies called from your functi
 This allows to conduct small chaos engineering experiments for your serverless application 
 in the `AWS Cloud <https://aws.amazon.com>`_.
 
+
+* Support for Latency injection using `delay`
+* Support for Exception injection using `exception_msg`
+* Support for HTTP Error status code injection using `error_code`
+* Using for SSM Parameter Store to control the experiment using `isEnabled`
+* Per Lambda function injection control using Environment variable (`FAILURE_INJECTION_PARAM`) (thanks to Gunnar Grosch)
+* Support for Serverless Framework using `sls deploy` (thanks to Gunnar Grosch)
+* Support for adding rate of failure using `rate`. (Default rate = 1)
+
 -----
 
-* Support for Latency injection using ```delay```
-* Support for Exception injection using ```exception_msg```
-* Support for HTTP Error status code injection using ```error_code```
-* Using for SSM Parameter Store to control the experiment using ```isEnabled```
-* Per Lambda function injection control using Environment variable (```FAILURE_INJECTION_PARAM```) (thanks to Gunnar Grosch)
-* Support for Serverless Framework using ```sls deploy``` (thanks to Gunnar Grosch)
-* Support for adding rate of failure using ```rate```. (Default rate = 1)
 
 Example
 --------
@@ -53,7 +55,7 @@ Example
         }
 
 
-When excecuted,  the Lambda function, e.g lambda_handler_with_exception('foo', 'bar'), will produce the following result:
+When excecuted,  the Lambda function, e.g ``lambda_handler_with_exception('foo', 'bar')``, will produce the following result:
 
 .. code:: shell
 
@@ -65,10 +67,10 @@ When excecuted,  the Lambda function, e.g lambda_handler_with_exception('foo', '
         raise Exception(exception_msg)
     Exception: I really failed seriously
 
-Pre-Install
------------
+Configuration
+-------------
 The configuration for the failure injection is stored in the `AWS SSM Parameter Store  
-<https://aws.amazon.com/ssm/>`_ and accessed at runtime by the `get_config()`
+<https://aws.amazon.com/ssm/>`_ and accessed at runtime by the ``get_config()``
 function:
 
 .. code:: json
@@ -93,4 +95,9 @@ Supported Decorators:
 and the following class:
 
 * `SessionWithDelay` - enabled to sub-classing requests library and call dependencies with delay
+
+
+
+-----
+
 
