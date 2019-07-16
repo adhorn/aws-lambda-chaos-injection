@@ -88,7 +88,7 @@ function:
 
 To store the above configuration into SSM using the `AWS CLI <https://aws.amazon.com/cli>`_ do the following:
 
-..code:: shell
+.. code:: shell
 
     aws ssm put-parameter --region eu-north-1 --name chaoslambda.config --type String --overwrite --value "{ \"delay\": 400, \"isEnabled\": true, \"error_code\
 ": 404, \"exception_msg\": \"I really failed seriously\", \"rate\": 1 }"
