@@ -8,7 +8,7 @@ setup(
     version=failure_injection.__version__,
 
     description='Decorators and Class to inject failures into AWS Lambda functions',
-    long_description=open('README.rst').read(),
+    long_description=open('../README.rst').read(),
 
     author='Adrian Hornsby',
     author_email='hornsby.adrian@gmail.com',

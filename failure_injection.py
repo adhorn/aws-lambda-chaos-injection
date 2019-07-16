@@ -4,7 +4,7 @@
 Failure Injection for AWS Lambda - failure_injection
 ======================================================
 
-``failure_injection`` is a small library injexting chaos into `AWS Lambda 
+``failure_injection`` is a small library injecting chaos into `AWS Lambda 
 <https://aws.amazon.com/lambda/>`_. 
 It offers simple python decorators to do `delay`, `exception` and `statusCode` injection
 and a Class to add `delay` to any 3rd party dependencies called from your function.
@@ -12,13 +12,13 @@ This allows to conduct small chaos engineering experiments for your serverless a
 in the `AWS Cloud <https://aws.amazon.com>`_.
 
 
-* Support for Latency injection using `delay`
-* Support for Exception injection using `exception_msg`
-* Support for HTTP Error status code injection using `error_code`
-* Using for SSM Parameter Store to control the experiment using `isEnabled`
-* Per Lambda function injection control using Environment variable (`FAILURE_INJECTION_PARAM`) (thanks to Gunnar Grosch)
-* Support for Serverless Framework using `sls deploy` (thanks to Gunnar Grosch)
-* Support for adding rate of failure using `rate`. (Default rate = 1)
+* Support for Latency injection using ``delay``
+* Support for Exception injection using ``exception_msg``
+* Support for HTTP Error status code injection using ``error_code``
+* Using for SSM Parameter Store to control the experiment using ``isEnabled``
+* Per Lambda function injection control using Environment variable (``FAILURE_INJECTION_PARAM``) (thanks to Gunnar Grosch)
+* Support for Serverless Framework using ``sls deploy`` (thanks to Gunnar Grosch)
+* Support for adding rate of failure using ``rate``. (Default rate = 1)
 
 -----
 
@@ -98,8 +98,6 @@ and the following class:
 * `SessionWithDelay` - enabled to sub-classing requests library and call dependencies with delay
 
 
-
------
 
 """
 
