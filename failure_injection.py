@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-
 Failure Injection for AWS Lambda - failure_injection
 ======================================================
 
@@ -96,9 +95,6 @@ Supported Decorators:
 and the following class:
 
 * `SessionWithDelay` - enabled to sub-classing requests library and call dependencies with delay
-
-
-
 """
 
 from __future__ import division, unicode_literals

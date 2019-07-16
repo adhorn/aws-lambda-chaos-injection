@@ -1,20 +1,20 @@
-from setuptools import setup
+import setuptools
 
 import failure_injection
 
-setup(
+with open("../README.rst", "r") as fh:
+    long_description = fh.read()
+
+setuptools.setup(
     name='failure-injection',
-
     version=failure_injection.__version__,
-
     description='Decorators and Class to inject failures into AWS Lambda functions',
-    long_description=open('../README.rst').read(),
-
+    long_description=long_description,
+    long_description_content_type="text/x-rst",
     author='Adrian Hornsby',
     author_email='hornsby.adrian@gmail.com',
-
+    url='https://github.com/adhorn/FailureInjectionLibrary',
     license='MIT',
-
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
@@ -22,12 +22,6 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Topic :: Software Development :: Libraries'
     ],
-
     keywords='chaos engineering lambda decorator aws lambda',
-
-    packages=['failure-injection'],
-
-    setup_requires=['pytest-runner'],
-    install_requires=['boto3'],
-    tests_require=['pytest'],
+    packages=setuptools.find_packages(),
 )
