@@ -86,11 +86,3 @@ html_sidebars = {
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'FailureInjectionLibrarydoc'
 
-# -- Options for manual page output ---------------------------------------
-
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'failureinjection', 'FailureInjection Documentation',
-     [author], 1)
-]

@@ -1,3 +1,4 @@
+
 Failure Injection for AWS Lambda - failure_injection
 ======================================================
 
@@ -8,7 +9,6 @@ and a Class to add `delay` to any 3rd party dependencies called from your functi
 This allows to conduct small chaos engineering experiments for your serverless application 
 in the `AWS Cloud <https://aws.amazon.com>`_.
 
-
 * Support for Latency injection using ``delay``
 * Support for Exception injection using ``exception_msg``
 * Support for HTTP Error status code injection using ``error_code``
@@ -17,7 +17,11 @@ in the `AWS Cloud <https://aws.amazon.com>`_.
 * Support for Serverless Framework using ``sls deploy`` (thanks to Gunnar Grosch)
 * Support for adding rate of failure using ``rate``. (Default rate = 1)
 
------
+Install
+--------
+.. code:: shell
+
+    pip install --index-url https://test.pypi.org/simple/ --no-deps failure-injection
 
 
 Example
