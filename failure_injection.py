@@ -14,9 +14,8 @@ in the `AWS Cloud <https://aws.amazon.com>`_.
 * Support for Exception injection using ``exception_msg``
 * Support for HTTP Error status code injection using ``error_code``
 * Using for SSM Parameter Store to control the experiment using ``isEnabled``
-* Per Lambda function injection control using Environment variable (``FAILURE_INJECTION_PARAM``) (thanks to Gunnar Grosch)
-* Support for Serverless Framework using ``sls deploy`` (thanks to Gunnar Grosch)
 * Support for adding rate of failure using ``rate``. (Default rate = 1)
+* Per Lambda function injection control using Environment variable (``FAILURE_INJECTION_PARAM``)
 
 Install
 --------
@@ -118,7 +117,7 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-__version__ = '0.3.0'
+__version__ = '0.1.0'
 
 
 def get_config(config_key):
