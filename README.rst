@@ -128,3 +128,9 @@ and the following class:
 
 * `SessionWithDelay` - enabled to sub-classing requests library and call dependencies with delay
 
+More information:
+-----------------
+
+
+
+`Full Documentation <https://aws-lambda-chaos-injection.readthedocs.io/en/latest/>`_

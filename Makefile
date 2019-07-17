@@ -9,8 +9,9 @@ SOURCEDIR     = .
 BUILDDIR      = build
 
 
-README.rst:
+README:
 	python3 -c 'import chaos_lambda;print(chaos_lambda.__doc__)' > README.rst
+	echo '`Full Documentation <https://aws-lambda-chaos-injection.readthedocs.io/en/latest/>`_' >> README.rst
 
 # Put it first so that "make" without argument is like "make help".
 help:

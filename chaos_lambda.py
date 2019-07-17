@@ -129,6 +129,11 @@ Supported Decorators:
 and the following class:
 
 * `SessionWithDelay` - enabled to sub-classing requests library and call dependencies with delay
+
+More information:
+-----------------
+
+
 """
 
 from __future__ import division, unicode_literals
