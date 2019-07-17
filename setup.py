@@ -27,6 +27,6 @@ setuptools.setup(
     keywords='chaos engineering lambda decorator aws lambda',
     packages=setuptools.find_packages(),
     py_modules=['chaos_lambda'],
-    install_requires=['ssm_cache', 'requests'],
+    install_requires=['boto3', 'future', 'ssm_cache', 'requests'],
     tests_require=['pytest'],
 )
