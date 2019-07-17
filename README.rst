@@ -20,7 +20,7 @@ Install
 --------
 .. code:: shell
 
-    pip install -i https://test.pypi.org/simple/ chaos-lambda
+    pip install chaos-lambda
 
 
 Example

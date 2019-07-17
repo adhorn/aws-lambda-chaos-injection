@@ -21,7 +21,7 @@ Install
 --------
 .. code:: shell
 
-    pip install -i https://test.pypi.org/simple/ chaos-lambda
+    pip install chaos-lambda
 
 
 Example
@@ -147,7 +147,7 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-__version__ = '0.1.10'
+__version__ = '0.1.2'
 
 
 def get_config(config_key):
