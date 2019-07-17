@@ -147,7 +147,7 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-__version__ = '0.1.8'
+__version__ = '0.1.10'
 
 
 def get_config(config_key):
