@@ -1,2 +1,5 @@
-requests==2.22.0
-ssm-cache==2.9
+requests>=2.22.0
+ssm-cache>=2.9
+boto3>=1.5.0
+botocore>=1.7.12
+future>=0.16.0
