@@ -1,0 +1,19 @@
+-r requirements.txt
+alabaster==0.7.12
+Babel==2.7.0
+imagesize==1.1.0
+Jinja2==2.10.1
+MarkupSafe==1.1.1
+packaging==19.0
+Pygments==2.4.2
+pyparsing==2.4.0
+python-dateutil==2.8.0
+pytz==2019.1
+snowballstemmer==1.9.0
+Sphinx==2.1.2
+sphinxcontrib-applehelp==1.0.1
+sphinxcontrib-devhelp==1.0.1
+sphinxcontrib-htmlhelp==1.0.2
+sphinxcontrib-jsmath==1.0.1
+sphinxcontrib-qthelp==1.0.2
+sphinxcontrib-serializinghtml==1.1.3
