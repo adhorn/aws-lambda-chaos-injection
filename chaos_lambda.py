@@ -4,7 +4,8 @@ Chaos Injection for AWS Lambda - chaos_lambda
 ======================================================
 
 .. image:: https://readthedocs.org/projects/aws-lambda-chaos-injection/badge/?version=latest
-
+    :target: https://aws-lambda-chaos-injection.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 ``chaos_lambda`` is a small library injecting chaos into `AWS Lambda 
 <https://aws.amazon.com/lambda/>`_. 
