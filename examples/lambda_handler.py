@@ -1,8 +1,8 @@
 import os
-from failure_injection import (
+from chaos_lambda import (
     inject_delay, inject_exception, inject_statuscode, SessionWithDelay)
 
-os.environ['FAILURE_INJECTION_PARAM'] = 'chaoslambda.config'
+os.environ['CHAOS_PARAM'] = 'chaoslambda.config'
 
 
 def session_request_with_delay():

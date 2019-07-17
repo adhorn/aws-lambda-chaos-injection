@@ -1,19 +1,19 @@
 import setuptools
 
-import failure_injection
+import chaos_lambda
 
 with open("README.rst", "r", encoding='utf-8') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='failure-injection',
-    version=failure_injection.__version__,
+    name='aws-lambda-failure-injection',
+    version=chaos_lambda.__version__,
     description='Decorators and Class to inject failures into AWS Lambda functions',
     long_description=long_description,
     long_description_content_type="text/x-rst",
     author='Adrian Hornsby',
     author_email='hornsby.adrian@gmail.com',
-    url='https://github.com/adhorn/FailureInjectionLibrary',
+    url='https://github.com/adhorn/aws-lambda-failure-injection',
     license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',

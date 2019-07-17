@@ -1,4 +1,4 @@
-from failure_injection import get_config
+from chaos_lambda import get_config
 from ssm_cache import InvalidParameterError
 import unittest
 import os
@@ -21,7 +21,7 @@ class TestStringMethods(unittest.TestCase):
 
     @ignore_warnings
     def setUp(self):
-        os.environ['FAILURE_INJECTION_PARAM'] = 'test.config'
+        os.environ['CHAOS_PARAM'] = 'test.config'
         client.put_parameter(
             Value="{ \"delay\": 200, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }",
             Name='test.config',
@@ -60,7 +60,7 @@ class TestStringMethods(unittest.TestCase):
 
     @ignore_warnings
     def test_get_config_bad_config(self):
-        os.environ['FAILURE_INJECTION_PARAM'] = 'test.conf'
+        os.environ['CHAOS_PARAM'] = 'test.conf'
         with self.assertRaises(InvalidParameterError):
             get_config('delay')
 

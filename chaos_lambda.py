@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Failure Injection for AWS Lambda - failure_injection
+Chaos Injection for AWS Lambda - chaos_lambda
 ======================================================
 
-``failure_injection`` is a small library injecting chaos into `AWS Lambda 
+``chaos_lambda`` is a small library injecting chaos into `AWS Lambda 
 <https://aws.amazon.com/lambda/>`_. 
 It offers simple python decorators to do `delay`, `exception` and `statusCode` injection
 and a Class to add `delay` to any 3rd party dependencies called from your function.
@@ -15,13 +15,13 @@ in the `AWS Cloud <https://aws.amazon.com>`_.
 * Support for HTTP Error status code injection using ``error_code``
 * Using for SSM Parameter Store to control the experiment using ``isEnabled``
 * Support for adding rate of failure using ``rate``. (Default rate = 1)
-* Per Lambda function injection control using Environment variable (``FAILURE_INJECTION_PARAM``)
+* Per Lambda function injection control using Environment variable (``CHAOS_PARAM``)
 
 Install
 --------
 .. code:: shell
 
-    pip install --index-url https://test.pypi.org/simple/ --no-deps failure-injection
+    pip install --index-url https://test.pypi.org/simple/ --no-deps chaos-lambda
 
 
 Example
@@ -30,10 +30,10 @@ Example
 
     # function.py
 
-    from failure_injection import (
+    from chaos_lambda import (
     inject_delay, inject_exception, inject_statuscode)
 
-    os.environ['FAILURE_INJECTION_PARAM'] = 'chaoslambda.config'
+    os.environ['CHAOS_PARAM'] = 'chaoslambda.config'
 
     @inject_exception
     def lambda_handler_with_exception(event, context):
@@ -65,7 +65,7 @@ When excecuted,  the Lambda function, e.g ``lambda_handler_with_exception('foo',
     corrupting now
     Traceback (most recent call last):
     File "<stdin>", line 1, in <module>
-    File "/.../failure_injection.py", line 199, in wrapper
+    File "/.../chaos_lambda.py", line 199, in wrapper
         raise Exception(exception_msg)
     Exception: I really failed seriously
 
@@ -92,10 +92,35 @@ To store the above configuration into SSM using the `AWS CLI <https://aws.amazon
     aws ssm put-parameter --region eu-north-1 --name chaoslambda.config --type String --overwrite --value "{ \"delay\": 400, \"isEnabled\": true, \"error_code\
 ": 404, \"exception_msg\": \"I really failed seriously\", \"rate\": 1 }"
 
+AWS Lambda will need to have `IAM access to SSM <https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-access.html>`_.
+
+.. code:: json
+
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ssm:DescribeParameters"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ssm:GetParameters",
+                    "ssm:GetParameter"
+                ],
+                "Resource": "arn:aws:ssm:eu-north-1:12345678910:parameter/chaoslambda.config"
+            }
+        ]
+    }
+
 
 Supported Decorators:
 ---------------------
-``failure_injection`` currently supports the following decorators:
+``chaos_lambda`` currently supports the following decorators:
 
 * `@inject_delay` - add delay in the AWS Lambda execution
 * `@inject_exception` - Raise an exception during the AWS Lambda execution
@@ -130,8 +155,8 @@ def get_config(config_key):
     Usage::
 
         >>> import os
-        >>> from failure_injection import get_config
-        >>> os.environ['FAILURE_INJECTION_PARAM'] = 'chaoslambda.config'
+        >>> from chaos_lambda import get_config
+        >>> os.environ['CHAOS_PARAM'] = 'chaoslambda.config'
         >>> get_config('delay')
         (400, 1)
         >>> get_config('exception_msg')
@@ -140,7 +165,7 @@ def get_config(config_key):
         (404, 1)
 
     """
-    param = SSMParameter(os.environ['FAILURE_INJECTION_PARAM'])
+    param = SSMParameter(os.environ['CHAOS_PARAM'])
     try:
         value = json.loads(param.value)
         if not value["isEnabled"]:
@@ -161,7 +186,7 @@ def inject_delay(func):
 
     Usage::
 
-      >>> from failure_injection import inject_delay
+      >>> from chaos_lambda import inject_delay
       >>> @inject_delay
       ... def handler(event, context):
       ...    return {
@@ -210,7 +235,7 @@ using ``get_config('exception_msg')`` which returns a tuple exception_msg, rate.
 
 Usage::
 
-    >>> from failure_injection import inject_exception
+    >>> from chaos_lambda import inject_exception
     >>> @inject_exception
     ... def handler(event, context):
     ...     return {
@@ -221,7 +246,7 @@ Usage::
     { "errorMessage": "I really failed seriously",
       "errorType": "Exception",
       "stackTrace": [
-        "File \"failure_injection.py\", line 76, in wrapper raise Exception(exception_msg)"
+        "File \"chaos_lambda.py\", line 76, in wrapper raise Exception(exception_msg)"
         ]
     }
 
@@ -248,7 +273,7 @@ using ``get_config('error_code')`` which returns a tuple error_code, rate.
 
 Usage::
 
-    >>> from failure_injection import inject_statuscode
+    >>> from chaos_lambda import inject_statuscode
     >>> @inject_statuscode
     ... def handler(event, context):
     ...    return {
@@ -283,7 +308,7 @@ class SessionWithDelay(requests.Session):
 
     Usage::
 
-       >>> from failure_injection import SessionWithDelay
+       >>> from chaos_lambda import SessionWithDelay
        >>> def dummy():
        ...     session = SessionWithDelay(delay=300)
        ...     session.get('https://stackoverflow.com/')

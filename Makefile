@@ -10,7 +10,7 @@ BUILDDIR      = build
 
 
 README.rst:
-	python3 -c 'import failure_injection;print(failure_injection.__doc__)' > README.rst
+	python3 -c 'import chaos_lambda;print(chaos_lambda.__doc__)' > README.rst
 
 # Put it first so that "make" without argument is like "make help".
 help:

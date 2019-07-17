@@ -17,12 +17,12 @@ sys.path.insert(0, os.path.abspath('.'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Failure Injection Library for AWS Lambda'
+project = 'Chaos Injection Library for AWS Lambda'
 copyright = '2019, Adrian Hornsby'
 author = 'Adrian Hornsby'
 
 # The full version, including alpha/beta/rc tags
-from failure_injection import __version__ as version
+from chaos_lambda import __version__ as version
 release = version
 
 # -- General configuration ---------------------------------------------------
@@ -62,7 +62,7 @@ html_theme = 'alabaster'
 # documentation.
 #
 html_theme_options = {'github_user': 'adhorn',
-                      'github_repo': 'FailureInjectionLibrary',
+                      'github_repo': 'aws-lambda-chaos-injection',
                       'github_banner': True}
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -84,5 +84,5 @@ html_sidebars = {
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'FailureInjectionLibrarydoc'
+htmlhelp_basename = 'ChaosInjectionLibrarydoc'
 

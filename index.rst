@@ -1,2 +1,2 @@
-.. automodule:: failure_injection
+.. automodule:: chaos_lambda
    :members:
