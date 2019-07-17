@@ -3,6 +3,9 @@
 Chaos Injection for AWS Lambda - chaos_lambda
 ======================================================
 
+.. image:: https://readthedocs.org/projects/aws-lambda-chaos-injection/badge/?version=latest
+
+
 ``chaos_lambda`` is a small library injecting chaos into `AWS Lambda 
 <https://aws.amazon.com/lambda/>`_. 
 It offers simple python decorators to do `delay`, `exception` and `statusCode` injection
