@@ -20,7 +20,7 @@ Install
 --------
 .. code:: shell
 
-    pip install --index-url https://test.pypi.org/simple/ --no-deps chaos-lambda
+    pip install -i https://test.pypi.org/simple/ chaos-lambda
 
 
 Example
