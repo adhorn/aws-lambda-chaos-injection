@@ -6,14 +6,14 @@ with open("README.rst", "r", encoding='utf-8') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='aws-lambda-failure-injection',
+    name='chaos-lambda',
     version=chaos_lambda.__version__,
     description='Decorators and Class to inject failures into AWS Lambda functions',
     long_description=long_description,
     long_description_content_type="text/x-rst",
     author='Adrian Hornsby',
     author_email='hornsby.adrian@gmail.com',
-    url='https://github.com/adhorn/aws-lambda-failure-injection',
+    url='https://github.com/adhorn/aws-lambda-chaos-injection',
     license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',
