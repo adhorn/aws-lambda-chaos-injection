@@ -65,7 +65,5 @@ class TestStringMethods(unittest.TestCase):
             get_config('delay')
 
 
-
-
 if __name__ == '__main__':
     unittest.main()

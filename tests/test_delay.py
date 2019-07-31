@@ -35,15 +35,12 @@ def handler_with_delay_arg(event, context):
         'body': 'Hello from Lambda!'
     }
 
-
 @inject_delay(delay=0)
 def handler_with_delay_zero(event, context):
     return {
         'statusCode': 200,
         'body': 'Hello from Lambda!'
     }
-    
-
 
 class TestStringMethods(unittest.TestCase):
 
