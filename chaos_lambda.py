@@ -40,7 +40,7 @@ Example
     os.environ['CHAOS_PARAM'] = 'chaoslambda.config'
 
     @inject_exception
-    def lambda_handler_with_exception(event, context):
+    def handler_with_exception(event, context):
         return {
             'statusCode': 200,
             'body': 'Hello from Lambda!'
@@ -48,22 +48,14 @@ Example
 
 
     @inject_exception(exception_type=TypeError, exception_msg='foobar')
-    def lambda_handler_with_exception_arg(event, context):
+    def handler_with_exception_arg(event, context):
         return {
             'statusCode': 200,
             'body': 'Hello from Lambda!'
         }
 
     @inject_exception(exception_type=ValueError)
-    def lambda_handler_with_exception_arg_2(event, context):
-        return {
-            'statusCode': 200,
-            'body': 'Hello from Lambda!'
-        }
-
-
-    @inject_delay
-    def lambda_handler_with_delay(event, context):
+    def handler_with_exception_arg_2(event, context):
         return {
             'statusCode': 200,
             'body': 'Hello from Lambda!'
@@ -71,22 +63,28 @@ Example
 
 
     @inject_statuscode
-    def lambda_handler_with_statuscode(event, context):
+    def handler_with_statuscode(event, context):
         return {
             'statusCode': 200,
             'body': 'Hello from Lambda!'
         }
 
     @inject_statuscode(error_code=200)
-    def lambda_handler_with_statuscode_arg(event, context):
+    def handler_with_statuscode_arg(event, context):
         return {
             'statusCode': 200,
             'body': 'Hello from Lambda!'
         }
 
+    @inject_delay
+    def handler_with_delay(event, context):
+        return {
+            'statusCode': 200,
+            'body': 'Hello from Lambda!'
+        }
 
     @inject_delay(delay=1000)
-    def lambda_handler_with_delay_arg(event, context):
+    def handler_with_delay_arg(event, context):
         return {
             'statusCode': 200,
             'body': 'Hello from Lambda!'
@@ -94,15 +92,14 @@ Example
 
 
     @inject_delay(delay=0)
-    def lambda_handler_with_delay_zero(event, context):
+    def handler_with_delay_zero(event, context):
         return {
             'statusCode': 200,
             'body': 'Hello from Lambda!'
         }
 
 
-
-When excecuted, the Lambda function, e.g ``lambda_handler_with_exception('foo', 'bar')``, will produce the following result:
+When excecuted, the Lambda function, e.g ``handler_with_exception('foo', 'bar')``, will produce the following result:
 
 .. code:: shell
 
@@ -395,7 +392,9 @@ Default use::
     ...       'body': 'Hello from Lambda!'
     ...    }
     >>> handler('foo', 'bar')
-    { "statusCode": 404, "body": "Hello from Lambda! }
+    Injecting Error 404 at a rate of 1
+    corrupting now
+    {'statusCode': 404, 'body': 'Hello from Lambda!'}
 
 With argument::
 
