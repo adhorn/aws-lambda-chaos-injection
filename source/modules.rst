@@ -1,5 +1,5 @@
-failure_injection_library
-=========================
+aws-lambda-chaos-injection
+==========================
 
 .. toctree::
    :maxdepth: 4
