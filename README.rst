@@ -68,7 +68,7 @@ Example
             'body': 'Hello from Lambda!'
         }
 
-    @inject_statuscode(error_code=200)
+    @inject_statuscode(error_code=400)
     def handler_with_statuscode_arg(event, context):
         return {
             'statusCode': 200,
