@@ -243,8 +243,8 @@ Default use::
     ...       'body': 'Hello from Lambda!'
     ...    }
     >>> handler('foo', 'bar')
-    delay: 400, rate: 1
-    Added 404.33ms to lambda_handler_with_delay
+    Injecting 400 of delay with a rate of 1
+    Added 402.20ms to handler
     {'statusCode': 200, 'body': 'Hello from Lambda!'}
 
 With argument::
@@ -256,8 +256,8 @@ With argument::
     ...       'body': 'Hello from Lambda!'
     ...    }
     >>> handler('foo', 'bar')
-    delay: 1000, rate: 1
-    Added 1003.88ms to lambda_handler_with_delay
+    Injecting 1000 of delay with a rate of 1
+    Added 1002.20ms to handler
     {'statusCode': 200, 'body': 'Hello from Lambda!'}
 
     """
