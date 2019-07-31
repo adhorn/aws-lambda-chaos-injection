@@ -34,14 +34,6 @@ def lambda_handler_with_exception_arg_2(event, context):
     }
 
 
-@inject_delay
-def lambda_handler_with_delay(event, context):
-    return {
-        'statusCode': 200,
-        'body': 'Hello from Lambda!'
-    }
-
-
 @inject_statuscode
 def lambda_handler_with_statuscode(event, context):
     return {
@@ -56,6 +48,12 @@ def lambda_handler_with_statuscode_arg(event, context):
         'body': 'Hello from Lambda!'
     }
 
+@inject_delay
+def lambda_handler_with_delay(event, context):
+    return {
+        'statusCode': 200,
+        'body': 'Hello from Lambda!'
+    }
 
 @inject_delay(delay=1000)
 def lambda_handler_with_delay_arg(event, context):
