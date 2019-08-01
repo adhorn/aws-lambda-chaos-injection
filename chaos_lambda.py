@@ -7,11 +7,11 @@ Chaos Injection for AWS Lambda - chaos_lambda
     :target: https://aws-lambda-chaos-injection.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-``chaos_lambda`` is a small library injecting chaos into `AWS Lambda 
-<https://aws.amazon.com/lambda/>`_. 
+``chaos_lambda`` is a small library injecting chaos into `AWS Lambda
+<https://aws.amazon.com/lambda/>`_.
 It offers simple python decorators to do `delay`, `exception` and `statusCode` injection
 and a Class to add `delay` to any 3rd party dependencies called from your function.
-This allows to conduct small chaos engineering experiments for your serverless application 
+This allows to conduct small chaos engineering experiments for your serverless application
 in the `AWS Cloud <https://aws.amazon.com>`_.
 
 * Support for Latency injection using ``delay``
@@ -40,28 +40,66 @@ Example
     os.environ['CHAOS_PARAM'] = 'chaoslambda.config'
 
     @inject_exception
-    def lambda_handler_with_exception(event, context):
+    def handler_with_exception(event, context):
+        return {
+            'statusCode': 200,
+            'body': 'Hello from Lambda!'
+        }
+
+
+    @inject_exception(exception_type=TypeError, exception_msg='foobar')
+    def handler_with_exception_arg(event, context):
+        return {
+            'statusCode': 200,
+            'body': 'Hello from Lambda!'
+        }
+
+    @inject_exception(exception_type=ValueError)
+    def handler_with_exception_arg_2(event, context):
+        return {
+            'statusCode': 200,
+            'body': 'Hello from Lambda!'
+        }
+
+
+    @inject_statuscode
+    def handler_with_statuscode(event, context):
+        return {
+            'statusCode': 200,
+            'body': 'Hello from Lambda!'
+        }
+
+    @inject_statuscode(error_code=400)
+    def handler_with_statuscode_arg(event, context):
         return {
             'statusCode': 200,
             'body': 'Hello from Lambda!'
         }
 
     @inject_delay
-    def lambda_handler_with_delay(event, context):
+    def handler_with_delay(event, context):
         return {
             'statusCode': 200,
             'body': 'Hello from Lambda!'
         }
 
-    @inject_statuscode
-    def lambda_handler_with_statuscode(event, context):
+    @inject_delay(delay=1000)
+    def handler_with_delay_arg(event, context):
         return {
             'statusCode': 200,
             'body': 'Hello from Lambda!'
         }
 
 
-When excecuted,  the Lambda function, e.g ``lambda_handler_with_exception('foo', 'bar')``, will produce the following result:
+    @inject_delay(delay=0)
+    def handler_with_delay_zero(event, context):
+        return {
+            'statusCode': 200,
+            'body': 'Hello from Lambda!'
+        }
+
+
+When excecuted, the Lambda function, e.g ``handler_with_exception('foo', 'bar')``, will produce the following result:
 
 .. code:: shell
 
@@ -75,7 +113,7 @@ When excecuted,  the Lambda function, e.g ``lambda_handler_with_exception('foo',
 
 Configuration
 -------------
-The configuration for the failure injection is stored in the `AWS SSM Parameter Store  
+The configuration for the failure injection is stored in the `AWS SSM Parameter Store
 <https://aws.amazon.com/ssm/>`_ and accessed at runtime by the ``get_config()``
 function:
 
@@ -142,6 +180,7 @@ More information:
 
 from __future__ import division, unicode_literals
 from ssm_cache import SSMParameter, InvalidParameterError
+from functools import wraps, partial
 import os
 import time
 import logging
@@ -151,28 +190,27 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-__version__ = '0.1.2'
+__version__ = '0.2'
 
 
 def get_config(config_key):
     """
-    Retrieve the configuration from the SSM parameter store
-    The config always returns a tuple (value, rate)
-    value: requested configuration
-    rate: the injection probability (default 1 --> 100%)
+Retrieve the configuration from the SSM parameter store
+The config always returns a tuple (value, rate)
+value: requested configuration
+rate: the injection probability (default 1 --> 100%)
 
-    Usage::
+How to use::
 
-        >>> import os
-        >>> from chaos_lambda import get_config
-        >>> os.environ['CHAOS_PARAM'] = 'chaoslambda.config'
-        >>> get_config('delay')
-        (400, 1)
-        >>> get_config('exception_msg')
-        ('I really failed seriously', 1)
-        >>> get_config('error_code')
-        (404, 1)
-
+    >>> import os
+    >>> from chaos_lambda import get_config
+    >>> os.environ['CHAOS_PARAM'] = 'chaoslambda.config'
+    >>> get_config('delay')
+    (400, 1)
+    >>> get_config('exception_msg')
+    ('I really failed seriously', 1)
+    >>> get_config('error_code')
+    (404, 1)
     """
     param = SSMParameter(os.environ['CHAOS_PARAM'])
     try:
@@ -185,46 +223,62 @@ def get_config(config_key):
         raise InvalidParameterError("{} does not exist in SSM".format(e))
     except KeyError as e:
         # not a valid Key in the SSM configuration
-        raise KeyError("{} is not a valid Key in the SSM configuration".format(e))
+        raise KeyError(
+            "{} is not a valid Key in the SSM configuration".format(e))
 
 
-def inject_delay(func):
+def inject_delay(func=None, delay=None):
     """
-    Add delay to the lambda function - delay is returned from the SSM paramater
-    using ``get_config('delay')`` which returns a tuple delay, rate.
+Add delay to the lambda function - delay is returned from the SSM paramater
+using ``get_config('delay')`` which returns a tuple delay, rate.
 
-    Usage::
+Default use::
 
-      >>> from chaos_lambda import inject_delay
-      >>> @inject_delay
-      ... def handler(event, context):
-      ...    return {
-      ...       'statusCode': 200,
-      ...       'body': 'Hello from Lambda!'
-      ...    }
-      >>> handler('foo', 'bar')
+    >>> @inject_delay
+    ... def handler(event, context):
+    ...    return {
+    ...       'statusCode': 200,
+    ...       'body': 'Hello from Lambda!'
+    ...    }
+    >>> handler('foo', 'bar')
+    Injecting 400 of delay with a rate of 1
+    Added 402.20ms to handler
+    {'statusCode': 200, 'body': 'Hello from Lambda!'}
 
-      This will create the following Log outup in CloudWatch (with a delay of 400ms)
-    
-        START RequestId: 5295aa0b-...-50fcfbebea1f Version: $LATEST
-        delay: 400, rate: 1
-        Added 400.61ms to lambda_handler
-        END RequestId: 5295aa0b-...-50fcfbebea1f
-        REPORT RequestId: 5295aa0b-...-50fcfbebea1f Duration: 442.65 ms Billed Duration: 500 ms  Memory Size: 128 MB Max Memory Used: 79 MB
+With argument::
+
+    >>> @inject_delay(delay=1000)
+    ... def handler(event, context):
+    ...    return {
+    ...       'statusCode': 200,
+    ...       'body': 'Hello from Lambda!'
+    ...    }
+    >>> handler('foo', 'bar')
+    Injecting 1000 of delay with a rate of 1
+    Added 1002.20ms to handler
+    {'statusCode': 200, 'body': 'Hello from Lambda!'}
 
     """
+    if not func:
+        return partial(inject_delay, delay=delay)
+
+    @wraps(func)
     def wrapper(*args, **kwargs):
-        delay, rate = get_config('delay')
-        if not delay:
-            return func(*args, **kwargs)
-        print("delay: {0}, rate: {1}".format(delay, rate))
-        # if delay and rate exist, delaying with that value at that rate
-        start = time.time()
-        if delay > 0 and rate >= 0:
+        if isinstance(delay, int):
+            _delay = delay
+            rate = 1
+        else:
+            _delay, rate = get_config('delay')
+            if not _delay:
+                return func(*args, **kwargs)
 
+        start = time.time()
+        if _delay > 0 and rate >= 0:
+            print("Injecting {0} of delay with a rate of {1}".format(
+                _delay, rate))
             # add latency approx rate% of the time
             if random.random() <= rate:
-                time.sleep(delay / 1000.0)
+                time.sleep(_delay / 1000.0)
 
         result = func(*args, **kwargs)
         end = time.time()
@@ -237,14 +291,13 @@ def inject_delay(func):
     return wrapper
 
 
-def inject_exception(func):
+def inject_exception(func=None, exception_type=None, exception_msg=None):
     """
 Forces the lambda function to fail and raise an exception
 using ``get_config('exception_msg')`` which returns a tuple exception_msg, rate.
 
-Usage::
+Default use (Error type is Exception)::
 
-    >>> from chaos_lambda import inject_exception
     >>> @inject_exception
     ... def handler(event, context):
     ...     return {
@@ -252,37 +305,91 @@ Usage::
     ...        'body': 'Hello from Lambda!'
     ...     }
     >>> handler('foo', 'bar')
-    { "errorMessage": "I really failed seriously",
-      "errorType": "Exception",
-      "stackTrace": [
-        "File \"chaos_lambda.py\", line 76, in wrapper raise Exception(exception_msg)"
-        ]
-    }
+    Injecting exception_type <class "Exception"> with message I really failed seriously a rate of 1
+    corrupting now
+    Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "/.../chaos_lambda.py", line 316, in wrapper
+            raise _exception_type(_exception_msg)
+    Exception: I really failed seriously
+
+With Error type argument::
+
+    >>> @inject_exception(exception_type=ValueError)
+    ... def lambda_handler_with_exception_arg_2(event, context):
+    ...     return {
+    ...         'statusCode': 200,
+    ...         'body': 'Hello from Lambda!'
+    ...     }
+    >>> lambda_handler_with_exception_arg_2('foo', 'bar')
+    Injecting exception_type <class 'ValueError'> with message I really failed seriously a rate of 1
+    corrupting now
+    Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "/.../chaos_lambda.py", line 316, in wrapper
+            raise _exception_type(_exception_msg)
+    ValueError: I really failed seriously
+
+With Error type and message argument::
+
+    >>> @inject_exception(exception_type=TypeError, exception_msg='foobar')
+    ... def lambda_handler_with_exception_arg(event, context):
+    ...     return {
+    ...         'statusCode': 200,
+    ...         'body': 'Hello from Lambda!'
+    ...     }
+    >>> lambda_handler_with_exception_arg('foo', 'bar')
+    Injecting exception_type <class 'TypeError'> with message foobar a rate of 1
+    corrupting now
+    Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "/.../chaos_lambda.py", line 316, in wrapper
+            raise _exception_type(_exception_msg)
+    TypeError: foobar
 
     """
+    if not func:
+        return partial(
+            inject_exception,
+            exception_type=exception_type,
+            exception_msg=exception_msg
+        )
+
+    @wraps(func)
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
-        exception_msg, rate = get_config('exception_msg')
-        if not exception_msg:
+        if isinstance(exception_type, type):
+            _exception_type = exception_type
+        else:
+            _exception_type = Exception
+
+        _exception_msg, rate = get_config('exception_msg')
+        if exception_msg:
+            _exception_msg = exception_msg
+
+        if not _exception_type:
             return result
-        print("exception_msg from config {0} with a rate of {1}".format(exception_msg, rate))
+        print("Injecting exception_type {0} with message {1} a rate of {2}".format(
+            _exception_type,
+            _exception_msg,
+            rate)
+        )
         # add injection approx rate% of the time
         if random.random() <= rate:
             print("corrupting now")
-            raise Exception(exception_msg)
+            raise _exception_type(_exception_msg)
         else:
             return result
     return wrapper
 
 
-def inject_statuscode(func):
+def inject_statuscode(func=None, error_code=None):
     """
 Forces the lambda function to return with a specific Status Code
 using ``get_config('error_code')`` which returns a tuple error_code, rate.
 
-Usage::
+Default use::
 
-    >>> from chaos_lambda import inject_statuscode
     >>> @inject_statuscode
     ... def handler(event, context):
     ...    return {
@@ -290,28 +397,51 @@ Usage::
     ...       'body': 'Hello from Lambda!'
     ...    }
     >>> handler('foo', 'bar')
-    { "statusCode": 404, "body": "Hello from Lambda! }
-    """
+    Injecting Error 404 at a rate of 1
+    corrupting now
+    {'statusCode': 404, 'body': 'Hello from Lambda!'}
 
+With argument::
+
+    >>> @inject_statuscode(error_code=400)
+    ... def lambda_handler_with_statuscode_arg(event, context):
+    ...     return {
+    ...         'statusCode': 200,
+    ...         'body': 'Hello from Lambda!'
+    ...     }
+    >>> lambda_handler_with_statuscode_arg('foo', 'bar')
+    Injecting Error 400 at a rate of 1
+    corrupting now
+    {'statusCode': 400, 'body': 'Hello from Lambda!'}
+    """
+    if not func:
+        return partial(inject_statuscode, error_code=error_code)
+
+    @wraps(func)
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
-        error_code, rate = get_config('error_code')
-        if not error_code:
-            return result
-        print("Error from config {0} at a rate of {1}".format(error_code, rate))
+        if isinstance(error_code, int):
+            _error_code = error_code
+            rate = 1
+        else:
+            _error_code, rate = get_config('error_code')
+            if not _error_code:
+                return result
+        print("Injecting Error {0} at a rate of {1}".format(_error_code, rate))
         # add injection approx rate% of the time
         if random.random() <= rate:
             print("corrupting now")
-            result['statusCode'] = error_code
+            result['statusCode'] = _error_code
             return result
         else:
             return result
     return wrapper
 
+
 class SessionWithDelay(requests.Session):
     """
     This is a class for injecting delay to 3rd party dependencies.
-    Subclassing the requests library is useful if you want to conduct other chaos experiments 
+    Subclassing the requests library is useful if you want to conduct other chaos experiments
     within the library, like error injection or requests modification.
     This is a simple subclassing of the parent class requests.Session to add delay to the request method.
 
@@ -326,6 +456,7 @@ class SessionWithDelay(requests.Session):
        Added 300.00ms of delay to GET
 
     """
+
     def __init__(self, delay=None, *args, **kwargs):
         super(SessionWithDelay, self).__init__(*args, **kwargs)
         self.delay = delay

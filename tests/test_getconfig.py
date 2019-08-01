@@ -45,13 +45,11 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(delay, 200)
         self.assertEqual(rate, 0.5)
 
-
     @ignore_warnings
     def test_get_config_error_code(self):
         delay, rate = get_config('error_code')
         self.assertEqual(delay, 404)
         self.assertEqual(rate, 0.5)
-
 
     @ignore_warnings
     def test_get_config_bad_key(self):
@@ -63,8 +61,6 @@ class TestStringMethods(unittest.TestCase):
         os.environ['CHAOS_PARAM'] = 'test.conf'
         with self.assertRaises(InvalidParameterError):
             get_config('delay')
-
-
 
 
 if __name__ == '__main__':
