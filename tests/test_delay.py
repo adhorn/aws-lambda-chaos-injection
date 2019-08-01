@@ -1,4 +1,3 @@
-from ssm_cache import InvalidParameterError
 from chaos_lambda import inject_delay
 from io import StringIO
 from unittest.mock import patch
@@ -6,7 +5,7 @@ import unittest
 import os
 import warnings
 import boto3
-import os
+
 
 client = boto3.client('ssm', region_name='eu-north-1')
 
@@ -21,12 +20,14 @@ def ignore_warnings(test_func):
             test_func(self, *args, **kwargs)
     return do_test
 
+
 @inject_delay
 def handler(event, context):
     return {
         'statusCode': 200,
         'body': 'Hello from Lambda!'
     }
+
 
 @inject_delay(delay=1000)
 def handler_with_delay_arg(event, context):
@@ -35,12 +36,14 @@ def handler_with_delay_arg(event, context):
         'body': 'Hello from Lambda!'
     }
 
+
 @inject_delay(delay=0)
 def handler_with_delay_zero(event, context):
     return {
         'statusCode': 200,
         'body': 'Hello from Lambda!'
     }
+
 
 class TestStringMethods(unittest.TestCase):
 
@@ -63,27 +66,30 @@ class TestStringMethods(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as fakeOutput:
             response = handler('foo', 'bar')
             assert (
-                'Injecting 400 of delay with a rate of 1' in fakeOutput.getvalue().strip()    
+                'Injecting 400 of delay with a rate of 1' in fakeOutput.getvalue().strip()
             )
-        self.assertEqual(str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+        self.assertEqual(
+            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
     @ignore_warnings
     def test_get_delay_arg(self):
         with patch('sys.stdout', new=StringIO()) as fakeOutput:
             response = handler_with_delay_arg('foo', 'bar')
             assert (
-                'Injecting 1000 of delay with a rate of 1' in fakeOutput.getvalue().strip()    
+                'Injecting 1000 of delay with a rate of 1' in fakeOutput.getvalue().strip()
             )
-        self.assertEqual(str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+        self.assertEqual(
+            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
     @ignore_warnings
     def test_get_delay_zero(self):
         with patch('sys.stdout', new=StringIO()) as fakeOutput:
             response = handler_with_delay_zero('foo', 'bar')
             assert (
-                'Added 0.00ms to handler_with_delay_zero' in fakeOutput.getvalue().strip()    
+                'Added 0.00ms to handler_with_delay_zero' in fakeOutput.getvalue().strip()
             )
-        self.assertEqual(str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+        self.assertEqual(
+            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
 if __name__ == '__main__':

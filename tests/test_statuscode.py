@@ -1,4 +1,3 @@
-from ssm_cache import InvalidParameterError
 from chaos_lambda import inject_statuscode
 from io import StringIO
 from unittest.mock import patch
@@ -6,7 +5,6 @@ import unittest
 import os
 import warnings
 import boto3
-import os
 
 client = boto3.client('ssm', region_name='eu-north-1')
 
@@ -21,12 +19,14 @@ def ignore_warnings(test_func):
             test_func(self, *args, **kwargs)
     return do_test
 
+
 @inject_statuscode
 def handler_with_statuscode(event, context):
     return {
         'statusCode': 200,
         'body': 'Hello from Lambda!'
     }
+
 
 @inject_statuscode(error_code=500)
 def handler_with_statuscode_arg(event, context):
@@ -57,18 +57,20 @@ class TestStringMethods(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as fakeOutput:
             response = handler_with_statuscode('foo', 'bar')
             assert (
-                'Injecting Error 404 at a rate of 1' in fakeOutput.getvalue().strip()    
+                'Injecting Error 404 at a rate of 1' in fakeOutput.getvalue().strip()
             )
-        self.assertEqual(str(response), "{'statusCode': 404, 'body': 'Hello from Lambda!'}")
+        self.assertEqual(
+            str(response), "{'statusCode': 404, 'body': 'Hello from Lambda!'}")
 
     @ignore_warnings
     def test_get_statuscode_arg(self):
         with patch('sys.stdout', new=StringIO()) as fakeOutput:
             response = handler_with_statuscode_arg('foo', 'bar')
             assert (
-                'Injecting Error 500 at a rate of 1' in fakeOutput.getvalue().strip()    
+                'Injecting Error 500 at a rate of 1' in fakeOutput.getvalue().strip()
             )
-        self.assertEqual(str(response), "{'statusCode': 500, 'body': 'Hello from Lambda!'}")
+        self.assertEqual(
+            str(response), "{'statusCode': 500, 'body': 'Hello from Lambda!'}")
 
 
 if __name__ == '__main__':

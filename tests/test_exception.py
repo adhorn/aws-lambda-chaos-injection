@@ -1,12 +1,8 @@
-from ssm_cache import InvalidParameterError
 from chaos_lambda import inject_exception
-from io import StringIO
-from unittest.mock import patch
 import unittest
 import os
 import warnings
 import boto3
-import os
 
 client = boto3.client('ssm', region_name='eu-north-1')
 
@@ -21,12 +17,14 @@ def ignore_warnings(test_func):
             test_func(self, *args, **kwargs)
     return do_test
 
+
 @inject_exception
 def handler_with_exception(event, context):
     return {
         'statusCode': 200,
         'body': 'Hello from Lambda!'
     }
+
 
 @inject_exception(exception_type=ValueError)
 def handler_with_exception_arg(event, context):
@@ -35,12 +33,14 @@ def handler_with_exception_arg(event, context):
         'body': 'Hello from Lambda!'
     }
 
+
 @inject_exception(exception_type=TypeError, exception_msg='foobar')
 def handler_with_exception_arg_2(event, context):
     return {
         'statusCode': 200,
         'body': 'Hello from Lambda!'
     }
+
 
 class TestStringMethods(unittest.TestCase):
 
@@ -60,7 +60,7 @@ class TestStringMethods(unittest.TestCase):
 
     @ignore_warnings
     def test_get_statuscode(self):
-         with self.assertRaises(Exception):
+        with self.assertRaises(Exception):
             handler_with_exception('foo', 'bar')
 
     @ignore_warnings

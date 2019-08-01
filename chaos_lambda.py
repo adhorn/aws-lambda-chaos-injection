@@ -7,11 +7,11 @@ Chaos Injection for AWS Lambda - chaos_lambda
     :target: https://aws-lambda-chaos-injection.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-``chaos_lambda`` is a small library injecting chaos into `AWS Lambda 
-<https://aws.amazon.com/lambda/>`_. 
+``chaos_lambda`` is a small library injecting chaos into `AWS Lambda
+<https://aws.amazon.com/lambda/>`_.
 It offers simple python decorators to do `delay`, `exception` and `statusCode` injection
 and a Class to add `delay` to any 3rd party dependencies called from your function.
-This allows to conduct small chaos engineering experiments for your serverless application 
+This allows to conduct small chaos engineering experiments for your serverless application
 in the `AWS Cloud <https://aws.amazon.com>`_.
 
 * Support for Latency injection using ``delay``
@@ -113,7 +113,7 @@ When excecuted, the Lambda function, e.g ``handler_with_exception('foo', 'bar')`
 
 Configuration
 -------------
-The configuration for the failure injection is stored in the `AWS SSM Parameter Store  
+The configuration for the failure injection is stored in the `AWS SSM Parameter Store
 <https://aws.amazon.com/ssm/>`_ and accessed at runtime by the ``get_config()``
 function:
 
@@ -223,7 +223,8 @@ How to use::
         raise InvalidParameterError("{} does not exist in SSM".format(e))
     except KeyError as e:
         # not a valid Key in the SSM configuration
-        raise KeyError("{} is not a valid Key in the SSM configuration".format(e))
+        raise KeyError(
+            "{} is not a valid Key in the SSM configuration".format(e))
 
 
 def inject_delay(func=None, delay=None):
@@ -260,19 +261,21 @@ With argument::
     """
     if not func:
         return partial(inject_delay, delay=delay)
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         if isinstance(delay, int):
             _delay = delay
             rate = 1
-        else:                    
+        else:
             _delay, rate = get_config('delay')
             if not _delay:
                 return func(*args, **kwargs)
 
         start = time.time()
         if _delay > 0 and rate >= 0:
-            print("Injecting {0} of delay with a rate of {1}".format(_delay, rate))
+            print("Injecting {0} of delay with a rate of {1}".format(
+                _delay, rate))
             # add latency approx rate% of the time
             if random.random() <= rate:
                 time.sleep(_delay / 1000.0)
@@ -347,17 +350,18 @@ With Error type and message argument::
     """
     if not func:
         return partial(
-            inject_exception, 
+            inject_exception,
             exception_type=exception_type,
             exception_msg=exception_msg
         )
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
         if isinstance(exception_type, type):
             _exception_type = exception_type
         else:
-            _exception_type = Exception       
+            _exception_type = Exception
 
         _exception_msg, rate = get_config('exception_msg')
         if exception_msg:
@@ -367,7 +371,7 @@ With Error type and message argument::
             return result
         print("Injecting exception_type {0} with message {1} a rate of {2}".format(
             _exception_type,
-            _exception_msg, 
+            _exception_msg,
             rate)
         )
         # add injection approx rate% of the time
@@ -377,6 +381,7 @@ With Error type and message argument::
         else:
             return result
     return wrapper
+
 
 def inject_statuscode(func=None, error_code=None):
     """
@@ -411,6 +416,7 @@ With argument::
     """
     if not func:
         return partial(inject_statuscode, error_code=error_code)
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
@@ -431,10 +437,11 @@ With argument::
             return result
     return wrapper
 
+
 class SessionWithDelay(requests.Session):
     """
     This is a class for injecting delay to 3rd party dependencies.
-    Subclassing the requests library is useful if you want to conduct other chaos experiments 
+    Subclassing the requests library is useful if you want to conduct other chaos experiments
     within the library, like error injection or requests modification.
     This is a simple subclassing of the parent class requests.Session to add delay to the request method.
 
@@ -449,6 +456,7 @@ class SessionWithDelay(requests.Session):
        Added 300.00ms of delay to GET
 
     """
+
     def __init__(self, delay=None, *args, **kwargs):
         super(SessionWithDelay, self).__init__(*args, **kwargs)
         self.delay = delay
