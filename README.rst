@@ -2,7 +2,7 @@
 Chaos Injection for AWS Lambda - chaos_lambda
 ======================================================
 
-|docs| |issues| |Maintenance| |Pypi| |Travis| |twitter| 
+|docs| |issues| |Maintenance| |Pypi| |Travis| |Coveralls| |twitter| 
 
 .. |docs| image:: https://readthedocs.org/projects/aws-lambda-chaos-injection/badge/?version=latest
     :target: https://aws-lambda-chaos-injection.readthedocs.io/en/latest/?badge=latest
@@ -24,6 +24,10 @@ Chaos Injection for AWS Lambda - chaos_lambda
 
 .. |Travis| image:: https://api.travis-ci.org/adhorn/aws-lambda-chaos-injection.svg?branch=master
     :target: https://travis-ci.org/adhorn/aws-lambda-chaos-injection
+    
+.. |Coveralls| image:: https://coveralls.io/repos/github/adhorn/aws-lambda-chaos-injection/badge.svg?branch=master
+:target: https://coveralls.io/github/adhorn/aws-lambda-chaos-injection?branch=master
+
     
 
 ``chaos_lambda`` is a small library injecting chaos into `AWS Lambda
