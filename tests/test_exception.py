@@ -6,7 +6,7 @@ import boto3
 
 client = boto3.client('ssm', region_name='eu-north-1')
 
-os.environ['CHAOS_PARAM'] = 'chaoslambda.config'
+os.environ['CHAOS_PARAM'] = 'test.config'
 
 
 def ignore_warnings(test_func):
