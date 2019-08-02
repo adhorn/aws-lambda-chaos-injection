@@ -11,3 +11,5 @@ script:
 after_success:
   - nosetests --with-coverage --cover-erase --cover-html --cover-package=ssm_cache
   - coveralls
+env:
+    - AWS_DEFAULT_REGION=eu-west-1 AWS_ACCESS_KEY_ID=dummy AWS_SECRET_ACCESS_KEY=dummy BOTO_CONFIG=/dev/null
