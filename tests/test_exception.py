@@ -42,7 +42,7 @@ def handler_with_exception_arg_2(event, context):
     }
 
 
-class TestStringMethods(unittest.TestCase):
+class TestExceptionMethods(unittest.TestCase):
 
     @ignore_warnings
     def setUp(self):
@@ -59,12 +59,12 @@ class TestStringMethods(unittest.TestCase):
         client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
-    def test_get_statuscode(self):
+    def test_get_exception(self):
         with self.assertRaises(Exception):
             handler_with_exception('foo', 'bar')
 
     @ignore_warnings
-    def test_get_statuscode_arg(self):
+    def test_get_exception_arg(self):
         with self.assertRaises(ValueError):
             handler_with_exception_arg('foo', 'bar')
 
@@ -72,6 +72,50 @@ class TestStringMethods(unittest.TestCase):
     def handler_with_exception_arg_2(self):
         with self.assertRaises(TypeError):
             handler_with_exception_arg_2('foo', 'bar')
+
+
+class TestExceptionMethodslowrate(unittest.TestCase):
+
+    @ignore_warnings
+    def setUp(self):
+        os.environ['CHAOS_PARAM'] = 'test.config'
+        client.put_parameter(
+            Value="{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.0000001 }",
+            Name='test.config',
+            Type='String',
+            Overwrite=True
+        )
+
+    @ignore_warnings
+    def tearDown(self):
+        client.delete_parameters(Names=['test.config'])
+
+    @ignore_warnings
+    def test_get_statuscode(self):
+        handler_with_exception('foo', 'bar')
+        self.assert_(True)
+
+
+class TestExceptionMethodsnotenabled(unittest.TestCase):
+
+    @ignore_warnings
+    def setUp(self):
+        os.environ['CHAOS_PARAM'] = 'test.config'
+        client.put_parameter(
+            Value="{ \"delay\": 400, \"isEnabled\": false, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
+            Name='test.config',
+            Type='String',
+            Overwrite=True
+        )
+
+    @ignore_warnings
+    def tearDown(self):
+        client.delete_parameters(Names=['test.config'])
+
+    @ignore_warnings
+    def test_get_statuscode(self):
+        handler_with_exception('foo', 'bar')
+        self.assert_(True)
 
 
 if __name__ == '__main__':
