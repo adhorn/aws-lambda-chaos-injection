@@ -17,7 +17,7 @@ def ignore_warnings(test_func):
     return do_test
 
 
-class TestStringMethods(unittest.TestCase):
+class TestConfigMethods(unittest.TestCase):
 
     @ignore_warnings
     def setUp(self):
@@ -47,8 +47,14 @@ class TestStringMethods(unittest.TestCase):
 
     @ignore_warnings
     def test_get_config_error_code(self):
-        delay, rate = get_config('error_code')
-        self.assertEqual(delay, 404)
+        error_code, rate = get_config('error_code')
+        self.assertEqual(error_code, 404)
+        self.assertEqual(rate, 0.5)
+
+    @ignore_warnings
+    def test_get_config_rate(self):
+        rate, rate = get_config('rate')
+        self.assertEqual(rate, 0.5)
         self.assertEqual(rate, 0.5)
 
     @ignore_warnings
@@ -61,6 +67,51 @@ class TestStringMethods(unittest.TestCase):
         os.environ['CHAOS_PARAM'] = 'test.conf'
         with self.assertRaises(InvalidParameterError):
             get_config('delay')
+
+
+class TestConfigErrorMethods(unittest.TestCase):
+
+    @ignore_warnings
+    def setUp(self):
+        os.environ['CHAOS_PARAM'] = 'test.config'
+        client.put_parameter(
+            Value="{ \"delay\": 200, \"isEnabled\": true, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }",
+            Name='test.config',
+            Type='String',
+            Overwrite=True
+        )
+
+    @ignore_warnings
+    def tearDown(self):
+        client.delete_parameters(Names=['test.config'])
+
+    @ignore_warnings
+    def test_get_config(self):
+        with self.assertRaises(KeyError):
+            get_config('error_code')
+
+
+class TestConfigisEnabled(unittest.TestCase):
+
+    @ignore_warnings
+    def setUp(self):
+        os.environ['CHAOS_PARAM'] = 'test.config'
+        client.put_parameter(
+            Value="{ \"delay\": 200, \"isEnabled\": false, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }",
+            Name='test.config',
+            Type='String',
+            Overwrite=True
+        )
+
+    @ignore_warnings
+    def tearDown(self):
+        client.delete_parameters(Names=['test.config'])
+
+    @ignore_warnings
+    def test_get_config(self):
+        delay, rate = get_config('error_code')
+        self.assertEqual(delay, 0)
+        self.assertEqual(rate, 0)
 
 
 if __name__ == '__main__':

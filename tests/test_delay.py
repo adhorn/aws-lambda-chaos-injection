@@ -45,7 +45,7 @@ def handler_with_delay_zero(event, context):
     }
 
 
-class TestStringMethods(unittest.TestCase):
+class TestDelayMethods(unittest.TestCase):
 
     @ignore_warnings
     def setUp(self):
@@ -87,6 +87,60 @@ class TestStringMethods(unittest.TestCase):
             response = handler_with_delay_zero('foo', 'bar')
             assert (
                 'Added 0.00ms to handler_with_delay_zero' in fakeOutput.getvalue().strip()
+            )
+        self.assertEqual(
+            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+
+
+class TestDelayMethodsnotEnabled(unittest.TestCase):
+
+    @ignore_warnings
+    def setUp(self):
+        os.environ['CHAOS_PARAM'] = 'test.config'
+        client.put_parameter(
+            Value="{ \"delay\": 0, \"isEnabled\": false, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
+            Name='test.config',
+            Type='String',
+            Overwrite=True
+        )
+
+    @ignore_warnings
+    def tearDown(self):
+        client.delete_parameters(Names=['test.config'])
+
+    @ignore_warnings
+    def test_get_delay(self):
+        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+            response = handler('foo', 'bar')
+            assert (
+                len(fakeOutput.getvalue().strip()) == 0
+            )
+        self.assertEqual(
+            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+
+
+class TestDelayMethodslowrate(unittest.TestCase):
+
+    @ignore_warnings
+    def setUp(self):
+        os.environ['CHAOS_PARAM'] = 'test.config'
+        client.put_parameter(
+            Value="{ \"delay\": 500, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }",
+            Name='test.config',
+            Type='String',
+            Overwrite=True
+        )
+
+    @ignore_warnings
+    def tearDown(self):
+        client.delete_parameters(Names=['test.config'])
+
+    @ignore_warnings
+    def test_get_delay(self):
+        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+            response = handler('foo', 'bar')
+            assert (
+                'Injecting' not in fakeOutput.getvalue().strip()
             )
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")

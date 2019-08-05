@@ -179,7 +179,8 @@ More information:
 """
 
 from __future__ import division, unicode_literals
-from ssm_cache import SSMParameter, InvalidParameterError
+from ssm_cache import SSMParameter
+from ssm_cache.cache import InvalidParameterError
 from functools import wraps, partial
 import os
 import time
@@ -216,15 +217,15 @@ How to use::
     try:
         value = json.loads(param.value)
         if not value["isEnabled"]:
-            return 0, 1
+            return 0, 0
         return value[config_key], value.get('rate', 1)
     except InvalidParameterError as e:
         # key does not exist in SSM
-        raise InvalidParameterError("{} does not exist in SSM".format(e))
+        raise InvalidParameterError("{} is not a valid SSM config".format(e))
     except KeyError as e:
         # not a valid Key in the SSM configuration
         raise KeyError(
-            "{} is not a valid Key in the SSM configuration".format(e))
+            "key {} not valid or found in SSM config".format(e))
 
 
 def inject_delay(func=None, delay=None):
@@ -274,20 +275,19 @@ With argument::
 
         start = time.time()
         if _delay > 0 and rate >= 0:
-            print("Injecting {0} of delay with a rate of {1}".format(
-                _delay, rate))
             # add latency approx rate% of the time
-            if random.random() <= rate:
+            if round(random.random(), 5) <= rate:
+                print("Injecting {0} of delay with a rate of {1}".format(
+                    _delay, rate))
                 time.sleep(_delay / 1000.0)
 
-        result = func(*args, **kwargs)
         end = time.time()
 
         print('Added {1:.2f}ms to {0:s}'.format(
             func.__name__,
             (end - start) * 1000
         ))
-        return result
+        return func(*args, **kwargs)
     return wrapper
 
 
@@ -357,29 +357,28 @@ With Error type and message argument::
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-        result = func(*args, **kwargs)
+        rate = 1
         if isinstance(exception_type, type):
             _exception_type = exception_type
         else:
             _exception_type = Exception
 
-        _exception_msg, rate = get_config('exception_msg')
         if exception_msg:
             _exception_msg = exception_msg
+        else:
+            _exception_msg, rate = get_config('exception_msg')
 
-        if not _exception_type:
-            return result
         print("Injecting exception_type {0} with message {1} a rate of {2}".format(
             _exception_type,
             _exception_msg,
             rate)
         )
         # add injection approx rate% of the time
-        if random.random() <= rate:
+        if round(random.random(), 5) <= rate:
             print("corrupting now")
             raise _exception_type(_exception_msg)
         else:
-            return result
+            return func(*args, **kwargs)
     return wrapper
 
 
@@ -425,11 +424,9 @@ With argument::
             rate = 1
         else:
             _error_code, rate = get_config('error_code')
-            if not _error_code:
-                return result
         print("Injecting Error {0} at a rate of {1}".format(_error_code, rate))
         # add injection approx rate% of the time
-        if random.random() <= rate:
+        if round(random.random(), 5) <= rate:
             print("corrupting now")
             result['statusCode'] = _error_code
             return result
