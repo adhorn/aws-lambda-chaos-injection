@@ -3,9 +3,31 @@
 Chaos Injection for AWS Lambda - chaos_lambda
 ======================================================
 
-.. image:: https://readthedocs.org/projects/aws-lambda-chaos-injection/badge/?version=latest
+|docs| |issues| |Maintenance| |Pypi| |Travis| |Coveralls| |twitter| 
+
+.. |docs| image:: https://readthedocs.org/projects/aws-lambda-chaos-injection/badge/?version=latest
     :target: https://aws-lambda-chaos-injection.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
+
+.. |twitter| image:: https://img.shields.io/twitter/url/https/github.com/adhorn/aws-lambda-chaos-injection?style=social
+    :alt: Twitter
+    :target: https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fadhorn%2Faws-lambda-chaos-injection
+
+.. |issues| image:: https://img.shields.io/github/issues/adhorn/aws-lambda-chaos-injection
+    :alt: Issues
+
+.. |Maintenance| image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
+    :alt: Maintenance
+    :target: https://GitHub.com/adhorn/aws-lambda-chaos-injection/graphs/commit-activity
+
+.. |Pypi| image:: https://badge.fury.io/py/chaos-lambda.svg
+    :target: https://badge.fury.io/py/chaos-lambda
+
+.. |Travis| image:: https://api.travis-ci.org/adhorn/aws-lambda-chaos-injection.svg?branch=master
+    :target: https://travis-ci.org/adhorn/aws-lambda-chaos-injection
+
+.. |Coveralls| image:: https://coveralls.io/repos/github/adhorn/aws-lambda-chaos-injection/badge.svg?branch=master
+    :target: https://coveralls.io/github/adhorn/aws-lambda-chaos-injection?branch=master
 
 ``chaos_lambda`` is a small library injecting chaos into `AWS Lambda
 <https://aws.amazon.com/lambda/>`_.
