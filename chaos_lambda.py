@@ -56,9 +56,10 @@ Example
 
     # function.py
 
-    from chaos_lambda import (
-    inject_delay, inject_exception, inject_statuscode)
+    import os
+    from chaos_lambda import inject_delay, inject_exception, inject_statuscode
 
+    # this should be set as a Lambda environment variable
     os.environ['CHAOS_PARAM'] = 'chaoslambda.config'
 
     @inject_exception
@@ -201,8 +202,6 @@ More information:
 """
 
 from __future__ import division, unicode_literals
-from ssm_cache import SSMParameter
-from ssm_cache.cache import InvalidParameterError
 from functools import wraps, partial
 import os
 import time
@@ -210,6 +209,9 @@ import logging
 import random
 import json
 import requests
+from ssm_cache import SSMParameter
+from ssm_cache.cache import InvalidParameterError
+
 
 logger = logging.getLogger(__name__)
 
@@ -241,13 +243,12 @@ How to use::
         if not value["isEnabled"]:
             return 0, 0
         return value[config_key], value.get('rate', 1)
-    except InvalidParameterError as e:
+    except InvalidParameterError as ex:
         # key does not exist in SSM
-        raise InvalidParameterError("{} is not a valid SSM config".format(e))
-    except KeyError as e:
+        raise InvalidParameterError("{} is not a valid SSM config".format(ex))
+    except KeyError as ex:
         # not a valid Key in the SSM configuration
-        raise KeyError(
-            "key {} not valid or found in SSM config".format(e))
+        raise KeyError("key {} not valid or found in SSM config".format(ex))
 
 
 def inject_delay(func=None, delay=None):
@@ -393,14 +394,14 @@ With Error type and message argument::
         print("Injecting exception_type {0} with message {1} a rate of {2}".format(
             _exception_type,
             _exception_msg,
-            rate)
-        )
+            rate
+        ))
         # add injection approx rate% of the time
         if round(random.random(), 5) <= rate:
             print("corrupting now")
             raise _exception_type(_exception_msg)
-        else:
-            return func(*args, **kwargs)
+
+        return func(*args, **kwargs)
     return wrapper
 
 
@@ -452,8 +453,8 @@ With argument::
             print("corrupting now")
             result['statusCode'] = _error_code
             return result
-        else:
-            return result
+
+        return result
     return wrapper
 
 
@@ -476,8 +477,8 @@ class SessionWithDelay(requests.Session):
 
     """
 
-    def __init__(self, delay=None, *args, **kwargs):
-        super(SessionWithDelay, self).__init__(*args, **kwargs)
+    def __init__(self, delay=None):
+        super(SessionWithDelay, self).__init__()
         self.delay = delay
 
     def request(self, method, url, **kwargs):
