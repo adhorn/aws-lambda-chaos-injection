@@ -296,20 +296,21 @@ With argument::
             if not _delay:
                 return func(*args, **kwargs)
 
+        logger.info("Injecting %d of delay with a rate of %d", _delay, rate)
+
         start = time.time()
         if _delay > 0 and rate >= 0:
             # add latency approx rate% of the time
             if round(random.random(), 5) <= rate:
-                print("Injecting {0} of delay with a rate of {1}".format(
-                    _delay, rate))
+                logger.debug('sleeping now')
                 time.sleep(_delay / 1000.0)
 
         end = time.time()
 
-        print('Added {1:.2f}ms to {0:s}'.format(
+        logger.debug('Added %.2fms to %s',
             func.__name__,
             (end - start) * 1000
-        ))
+        )
         return func(*args, **kwargs)
     return wrapper
 
@@ -391,14 +392,14 @@ With Error type and message argument::
         else:
             _exception_msg, rate = get_config('exception_msg')
 
-        print("Injecting exception_type {0} with message {1} a rate of {2}".format(
+        logger.info("Injecting exception_type %s with message %s a rate of %d",
             _exception_type,
             _exception_msg,
-            rate
-        ))
+            rate,
+        )
         # add injection approx rate% of the time
         if round(random.random(), 5) <= rate:
-            print("corrupting now")
+            logger.info("corrupting now")
             raise _exception_type(_exception_msg)
 
         return func(*args, **kwargs)
@@ -447,10 +448,10 @@ With argument::
             rate = 1
         else:
             _error_code, rate = get_config('error_code')
-        print("Injecting Error {0} at a rate of {1}".format(_error_code, rate))
+        logger.info("Injecting Error %s at a rate of %d", _error_code, rate)
         # add injection approx rate% of the time
         if round(random.random(), 5) <= rate:
-            print("corrupting now")
+            logger.debug("corrupting now")
             result['statusCode'] = _error_code
             return result
 
@@ -482,7 +483,6 @@ class SessionWithDelay(requests.Session):
         self.delay = delay
 
     def request(self, method, url, **kwargs):
-        print('Added {1:.2f}ms of delay to {0:s}'.format(
-            method, self.delay))
+        logger.info('Added %.2fms of delay to %s', self.delay, method)
         time.sleep(self.delay / 1000.0)
         return super(SessionWithDelay, self).request(method, url, **kwargs)
