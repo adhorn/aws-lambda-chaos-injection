@@ -308,8 +308,8 @@ With argument::
         end = time.time()
 
         logger.debug('Added %.2fms to %s',
-            func.__name__,
-            (end - start) * 1000
+            (end - start) * 1000,
+            func.__name__
         )
         return func(*args, **kwargs)
     return wrapper
@@ -399,7 +399,7 @@ With Error type and message argument::
         )
         # add injection approx rate% of the time
         if round(random.random(), 5) <= rate:
-            logger.info("corrupting now")
+            logger.debug("corrupting now")
             raise _exception_type(_exception_msg)
 
         return func(*args, **kwargs)
