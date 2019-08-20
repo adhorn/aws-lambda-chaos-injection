@@ -55,9 +55,10 @@ Example
 
     # function.py
 
-    from chaos_lambda import (
-    inject_delay, inject_exception, inject_statuscode)
+    import os
+    from chaos_lambda import inject_delay, inject_exception, inject_statuscode
 
+    # this should be set as a Lambda environment variable
     os.environ['CHAOS_PARAM'] = 'chaoslambda.config'
 
     @inject_exception
