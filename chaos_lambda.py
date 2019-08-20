@@ -243,7 +243,7 @@ How to use::
         return value[config_key], value.get('rate', 1)
     except InvalidParameterError as e:
         # key does not exist in SSM
-        raise InvalidParameterError("{} is not a valid SSM config".format(e))
+        raise InvalidParameterError("{} is not a valid SSM config".format(param.name))
     except KeyError as e:
         # not a valid Key in the SSM configuration
         raise KeyError(
