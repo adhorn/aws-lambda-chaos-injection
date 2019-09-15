@@ -380,6 +380,10 @@ With Error type and message argument::
 
     @wraps(func)
     def wrapper(*args, **kwargs):
+        _is_enabled, _  = get_config('isEnabled')
+        if not _is_enabled:
+            return func(*args, **kwargs)
+
         rate = 1
         if isinstance(exception_type, type):
             _exception_type = exception_type
