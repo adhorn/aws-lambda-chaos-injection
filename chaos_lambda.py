@@ -214,7 +214,7 @@ from ssm_cache.cache import InvalidParameterError
 
 LOGGER = logging.getLogger(__name__)
 
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 
 
 def get_config(config_key):
