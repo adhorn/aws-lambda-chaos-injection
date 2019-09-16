@@ -9,8 +9,10 @@ matrix:
       sudo: true
 install:
   - travis_retry pip install -r requirements-dev.txt
+before_script:
+  - pip install python-coveralls
+  - pip install pytest-cov
 script:
-  - nosetests
+  - pytest
 after_success:
-  - nosetests --with-coverage --cover-erase --cover-html --cover-package=chaos_lambda
   - coveralls

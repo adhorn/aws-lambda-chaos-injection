@@ -1,10 +1,10 @@
 from chaos_lambda import inject_delay
-from io import StringIO
-from unittest.mock import patch
 import unittest
 import os
 import warnings
 import boto3
+import logging
+import pytest
 
 
 client = boto3.client('ssm', region_name='eu-north-1')
@@ -47,6 +47,10 @@ def handler_with_delay_zero(event, context):
 
 class TestDelayMethods(unittest.TestCase):
 
+    @pytest.fixture(autouse=True)
+    def inject_fixtures(self, caplog):
+        self._caplog = caplog
+
     @ignore_warnings
     def setUp(self):
         os.environ['CHAOS_PARAM'] = 'test.config'
@@ -63,36 +67,49 @@ class TestDelayMethods(unittest.TestCase):
 
     @ignore_warnings
     def test_get_delay(self):
-        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+        with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler('foo', 'bar')
             assert (
-                'Injecting 400 of delay with a rate of 1' in fakeOutput.getvalue().strip()
+                'Injecting 400 ms of delay with a rate of 1' in self._caplog.text
+            )
+            assert (
+                'sleeping now' in self._caplog.text
             )
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
     @ignore_warnings
     def test_get_delay_arg(self):
-        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+        with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_delay_arg('foo', 'bar')
             assert (
-                'Injecting 1000 of delay with a rate of 1' in fakeOutput.getvalue().strip()
+                'Injecting 1000 ms of delay with a rate of 1' in self._caplog.text
+            )
+            assert (
+                'sleeping now' in self._caplog.text
             )
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
     @ignore_warnings
     def test_get_delay_zero(self):
-        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+        with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_delay_zero('foo', 'bar')
             assert (
-                'Added 0.00ms to handler_with_delay_zero' in fakeOutput.getvalue().strip()
+                'Injecting 0 ms of delay with a rate of 1' in self._caplog.text
+            )
+            assert (
+                'sleeping now' not in self._caplog.text
             )
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
 class TestDelayMethodsnotEnabled(unittest.TestCase):
+
+    @pytest.fixture(autouse=True)
+    def inject_fixtures(self, caplog):
+        self._caplog = caplog
 
     @ignore_warnings
     def setUp(self):
@@ -110,16 +127,23 @@ class TestDelayMethodsnotEnabled(unittest.TestCase):
 
     @ignore_warnings
     def test_get_delay(self):
-        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+        with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler('foo', 'bar')
             assert (
-                len(fakeOutput.getvalue().strip()) == 0
+                len(self._caplog.text) == 0
+            )
+            assert (
+                'sleeping now' not in self._caplog.text
             )
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
 class TestDelayMethodslowrate(unittest.TestCase):
+
+    @pytest.fixture(autouse=True)
+    def inject_fixtures(self, caplog):
+        self._caplog = caplog
 
     @ignore_warnings
     def setUp(self):
@@ -137,10 +161,10 @@ class TestDelayMethodslowrate(unittest.TestCase):
 
     @ignore_warnings
     def test_get_delay(self):
-        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+        with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler('foo', 'bar')
             assert (
-                'Injecting' not in fakeOutput.getvalue().strip()
+                'sleeping now' not in self._caplog.text
             )
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")

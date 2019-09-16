@@ -3,6 +3,8 @@ from unittest.mock import patch
 from io import StringIO
 import unittest
 import warnings
+import pytest
+import logging
 
 
 def ignore_warnings(test_func):
@@ -22,12 +24,16 @@ def session_request_with_delay():
 
 class TestSessionMethods(unittest.TestCase):
 
+    @pytest.fixture(autouse=True)
+    def inject_fixtures(self, caplog):
+        self._caplog = caplog
+
     @ignore_warnings
     def test_get_statuscode_arg(self):
-        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+        with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             session_request_with_delay()
             assert (
-                'Added 300.00ms of delay to GET' in fakeOutput.getvalue().strip()
+                'Added 300.00ms of delay to GET' in self._caplog.text
             )
 
 
