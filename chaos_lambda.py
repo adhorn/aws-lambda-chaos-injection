@@ -3,7 +3,7 @@
 Chaos Injection for AWS Lambda - chaos_lambda
 ======================================================
 
-|docs| |issues| |Maintenance| |Pypi| |Travis| |Coveralls| |twitter| 
+|docs| |issues| |Maintenance| |Pypi| |Travis| |Coveralls| |twitter|
 
 .. |docs| image:: https://readthedocs.org/projects/aws-lambda-chaos-injection/badge/?version=latest
     :target: https://aws-lambda-chaos-injection.readthedocs.io/en/latest/?badge=latest
@@ -212,10 +212,9 @@ import requests
 from ssm_cache import SSMParameter
 from ssm_cache.cache import InvalidParameterError
 
+LOGGER = logging.getLogger(__name__)
 
-logger = logging.getLogger(__name__)
-
-__version__ = '0.2.1'
+__version__ = '0.2.3'
 
 
 def get_config(config_key):
@@ -296,20 +295,26 @@ With argument::
             if not _delay:
                 return func(*args, **kwargs)
 
+        LOGGER.info(
+            "Injecting %d ms of delay with a rate of %s",
+            _delay, rate
+        )
+
         start = time.time()
         if _delay > 0 and rate >= 0:
             # add latency approx rate% of the time
             if round(random.random(), 5) <= rate:
-                print("Injecting {0} of delay with a rate of {1}".format(
-                    _delay, rate))
+                LOGGER.debug('sleeping now')
                 time.sleep(_delay / 1000.0)
 
         end = time.time()
 
-        print('Added {1:.2f}ms to {0:s}'.format(
-            func.__name__,
-            (end - start) * 1000
-        ))
+        LOGGER.debug(
+            'Added %.2fms to %s',
+            (end - start) * 1000,
+            func.__name__
+        )
+
         return func(*args, **kwargs)
     return wrapper
 
@@ -380,7 +385,7 @@ With Error type and message argument::
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-        _is_enabled, _  = get_config('isEnabled')
+        _is_enabled, _ = get_config('isEnabled')
         if not _is_enabled:
             return func(*args, **kwargs)
 
@@ -395,14 +400,16 @@ With Error type and message argument::
         else:
             _exception_msg, rate = get_config('exception_msg')
 
-        print("Injecting exception_type {0} with message {1} a rate of {2}".format(
+        LOGGER.info(
+            "Injecting exception_type %s with message %s a rate of %d",
             _exception_type,
             _exception_msg,
             rate
-        ))
+        )
+
         # add injection approx rate% of the time
         if round(random.random(), 5) <= rate:
-            print("corrupting now")
+            LOGGER.debug("corrupting now")
             raise _exception_type(_exception_msg)
 
         return func(*args, **kwargs)
@@ -451,10 +458,10 @@ With argument::
             rate = 1
         else:
             _error_code, rate = get_config('error_code')
-        print("Injecting Error {0} at a rate of {1}".format(_error_code, rate))
+        LOGGER.info("Injecting Error %s at a rate of %d", _error_code, rate)
         # add injection approx rate% of the time
         if round(random.random(), 5) <= rate:
-            print("corrupting now")
+            LOGGER.debug("corrupting now")
             result['statusCode'] = _error_code
             return result
 
@@ -485,8 +492,7 @@ class SessionWithDelay(requests.Session):
         super(SessionWithDelay, self).__init__()
         self.delay = delay
 
-    def request(self, method, url, **kwargs):
-        print('Added {1:.2f}ms of delay to {0:s}'.format(
-            method, self.delay))
+    def request(self, method, url, *args, **kwargs):
+        LOGGER.info('Added %.2fms of delay to %s', self.delay, method)
         time.sleep(self.delay / 1000.0)
-        return super(SessionWithDelay, self).request(method, url, **kwargs)
+        return super(SessionWithDelay, self).request(method, url, *args, **kwargs)

@@ -69,7 +69,7 @@ class TestExceptionMethods(unittest.TestCase):
             handler_with_exception_arg('foo', 'bar')
 
     @ignore_warnings
-    def handler_with_exception_arg_2(self):
+    def test_handler_with_exception_arg_2(self):
         with self.assertRaises(TypeError):
             handler_with_exception_arg_2('foo', 'bar')
 

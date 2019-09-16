@@ -1,10 +1,10 @@
 from chaos_lambda import inject_statuscode
-from io import StringIO
-from unittest.mock import patch
 import unittest
 import os
 import warnings
 import boto3
+import pytest
+import logging
 
 client = boto3.client('ssm', region_name='eu-north-1')
 
@@ -38,6 +38,10 @@ def handler_with_statuscode_arg(event, context):
 
 class TestStatusCodeMethods(unittest.TestCase):
 
+    @pytest.fixture(autouse=True)
+    def inject_fixtures(self, caplog):
+        self._caplog = caplog
+
     @ignore_warnings
     def setUp(self):
         os.environ['CHAOS_PARAM'] = 'test.config'
@@ -54,20 +58,20 @@ class TestStatusCodeMethods(unittest.TestCase):
 
     @ignore_warnings
     def test_get_statuscode(self):
-        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+        with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_statuscode('foo', 'bar')
             assert (
-                'Injecting Error 404 at a rate of 1' in fakeOutput.getvalue().strip()
+                'Injecting Error 404 at a rate of 1' in self._caplog.text
             )
         self.assertEqual(
             str(response), "{'statusCode': 404, 'body': 'Hello from Lambda!'}")
 
     @ignore_warnings
     def test_get_statuscode_arg(self):
-        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+        with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_statuscode_arg('foo', 'bar')
             assert (
-                'Injecting Error 500 at a rate of 1' in fakeOutput.getvalue().strip()
+                'Injecting Error 500 at a rate of 1' in self._caplog.text
             )
         self.assertEqual(
             str(response), "{'statusCode': 500, 'body': 'Hello from Lambda!'}")
