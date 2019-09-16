@@ -3,8 +3,6 @@ import unittest
 import os
 import warnings
 import boto3
-import pytest
-
 
 client = boto3.client('ssm', region_name='eu-north-1')
 
@@ -46,10 +44,6 @@ def handler_with_exception_arg_2(event, context):
 
 class TestExceptionMethods(unittest.TestCase):
 
-    @pytest.fixture(autouse=True)
-    def inject_fixtures(self, caplog):
-        self._caplog = caplog
-
     @ignore_warnings
     def setUp(self):
         os.environ['CHAOS_PARAM'] = 'test.config'
@@ -75,16 +69,12 @@ class TestExceptionMethods(unittest.TestCase):
             handler_with_exception_arg('foo', 'bar')
 
     @ignore_warnings
-    def handler_with_exception_arg_2(self):
+    def test_handler_with_exception_arg_2(self):
         with self.assertRaises(TypeError):
             handler_with_exception_arg_2('foo', 'bar')
 
 
 class TestExceptionMethodslowrate(unittest.TestCase):
-
-    @pytest.fixture(autouse=True)
-    def inject_fixtures(self, caplog):
-        self._caplog = caplog
 
     @ignore_warnings
     def setUp(self):
@@ -107,10 +97,6 @@ class TestExceptionMethodslowrate(unittest.TestCase):
 
 
 class TestExceptionMethodsnotenabled(unittest.TestCase):
-
-    @pytest.fixture(autouse=True)
-    def inject_fixtures(self, caplog):
-        self._caplog = caplog
 
     @ignore_warnings
     def setUp(self):
