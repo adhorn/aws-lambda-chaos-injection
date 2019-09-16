@@ -9,9 +9,7 @@ matrix:
       sudo: true
 install:
   - travis_retry pip install -r requirements-dev.txt
-before_script:
-  - pip install python-coveralls
-  - pip install pytest-cov
+  - travis_retry pip install .
 script:
   - pytest
 after_success:
