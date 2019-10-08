@@ -214,7 +214,7 @@ from ssm_cache.cache import InvalidParameterError
 
 LOGGER = logging.getLogger(__name__)
 
-__version__ = '0.2.3'
+__version__ = '0.2.4'
 
 
 def get_config(config_key):
@@ -287,6 +287,10 @@ With argument::
 
     @wraps(func)
     def wrapper(*args, **kwargs):
+        _is_enabled, _ = get_config('isEnabled')
+        if not _is_enabled:
+            return func(*args, **kwargs)
+
         if isinstance(delay, int):
             _delay = delay
             rate = 1
@@ -453,6 +457,11 @@ With argument::
     @wraps(func)
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
+
+        _is_enabled, _ = get_config('isEnabled')
+        if not _is_enabled:
+            return result
+
         if isinstance(error_code, int):
             _error_code = error_code
             rate = 1

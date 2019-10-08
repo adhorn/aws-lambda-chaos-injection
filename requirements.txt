@@ -1,7 +1,6 @@
 boto3==1.9.188
 botocore==1.12.188
 certifi==2019.6.16
-chaos-lambda==0.1.2
 chardet==3.0.4
 docutils==0.14
 future==0.17.1

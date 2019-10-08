@@ -122,6 +122,12 @@ class TestStatusCodeMethodsnotenabled(unittest.TestCase):
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
+    @ignore_warnings
+    def handler_with_statuscode_arg(self):
+        response = handler_with_statuscode_arg('foo', 'bar')
+        self.assertEqual(
+            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -138,6 +138,32 @@ class TestDelayMethodsnotEnabled(unittest.TestCase):
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
+    @ignore_warnings
+    def test_get_delay_arg(self):
+        with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
+            response = handler_with_delay_arg('foo', 'bar')
+            assert (
+                len(self._caplog.text) == 0
+            )
+            assert (
+                'sleeping now' not in self._caplog.text
+            )
+        self.assertEqual(
+            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+
+    @ignore_warnings
+    def test_get_delay_zero(self):
+        with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
+            response = handler_with_delay_zero('foo', 'bar')
+            assert (
+                len(self._caplog.text) == 0
+            )
+            assert (
+                'sleeping now' not in self._caplog.text
+            )
+        self.assertEqual(
+            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+
 
 class TestDelayMethodslowrate(unittest.TestCase):
 
@@ -168,6 +194,38 @@ class TestDelayMethodslowrate(unittest.TestCase):
             )
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+
+
+class TestDelayEnabledNoDelay(unittest.TestCase):
+    
+    @pytest.fixture(autouse=True)
+    def inject_fixtures(self, caplog):
+        self._caplog = caplog
+
+    @ignore_warnings
+    def setUp(self):
+        os.environ['CHAOS_PARAM'] = 'test.config'
+        client.put_parameter(
+            Value="{ \"delay\": 0, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }",
+            Name='test.config',
+            Type='String',
+            Overwrite=True
+        )
+
+    @ignore_warnings
+    def tearDown(self):
+        client.delete_parameters(Names=['test.config'])
+
+    @ignore_warnings
+    def test_get_delay(self):
+        with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
+            response = handler('foo', 'bar')
+            assert (
+                'sleeping now' not in self._caplog.text
+            )
+        self.assertEqual(
+            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+
 
 
 if __name__ == '__main__':
