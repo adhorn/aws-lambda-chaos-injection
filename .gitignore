@@ -1,3 +1,7 @@
+# Examples 
+examples/vendor
+
+
 # Serverless specific
 .serverless
 
