@@ -2,7 +2,7 @@
 Chaos Injection for AWS Lambda - chaos_lambda
 ======================================================
 
-|docs| |issues| |Maintenance| |Pypi| |Travis| |Coveralls| |twitter| 
+|docs| |issues| |Maintenance| |Pypi| |Travis| |Coveralls| |twitter|
 
 .. |docs| image:: https://readthedocs.org/projects/aws-lambda-chaos-injection/badge/?version=latest
     :target: https://aws-lambda-chaos-injection.readthedocs.io/en/latest/?badge=latest
