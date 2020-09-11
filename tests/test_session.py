@@ -1,9 +1,6 @@
 from chaos_lambda import SessionWithDelay
-from unittest.mock import patch
-from test_abstract import client, ignore_warnings
-from io import StringIO
+from . import TestBase, ignore_warnings
 import unittest
-import warnings
 import pytest
 import logging
 
@@ -14,7 +11,7 @@ def session_request_with_delay():
     pass
 
 
-class TestSessionMethods(unittest.TestCase):
+class TestSessionMethods(TestBase):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):

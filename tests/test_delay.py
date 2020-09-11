@@ -1,9 +1,7 @@
 from chaos_lambda import inject_delay
-from test_abstract import client, ignore_warnings
+from . import TestBase, ignore_warnings
 import unittest
 import os
-import warnings
-import boto3
 import logging
 import pytest
 
@@ -32,7 +30,7 @@ def handler_with_delay_zero(event, context):
     }
 
 
-class TestDelayMethods(unittest.TestCase):
+class TestDelayMethods(TestBase):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -41,7 +39,7 @@ class TestDelayMethods(unittest.TestCase):
     @ignore_warnings
     def setUp(self):
         os.environ['CHAOS_PARAM'] = 'test.config'
-        client.put_parameter(
+        self.ssm_client.put_parameter(
             Value="{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
             Name='test.config',
             Type='String',
@@ -50,7 +48,7 @@ class TestDelayMethods(unittest.TestCase):
 
     @ignore_warnings
     def tearDown(self):
-        client.delete_parameters(Names=['test.config'])
+        self.ssm_client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_delay(self):
@@ -92,7 +90,7 @@ class TestDelayMethods(unittest.TestCase):
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestDelayMethodsnotEnabled(unittest.TestCase):
+class TestDelayMethodsnotEnabled(TestBase):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -101,7 +99,7 @@ class TestDelayMethodsnotEnabled(unittest.TestCase):
     @ignore_warnings
     def setUp(self):
         os.environ['CHAOS_PARAM'] = 'test.config'
-        client.put_parameter(
+        self.ssm_client.put_parameter(
             Value="{ \"delay\": 0, \"isEnabled\": false, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
             Name='test.config',
             Type='String',
@@ -110,7 +108,7 @@ class TestDelayMethodsnotEnabled(unittest.TestCase):
 
     @ignore_warnings
     def tearDown(self):
-        client.delete_parameters(Names=['test.config'])
+        self.ssm_client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_delay(self):
@@ -152,7 +150,7 @@ class TestDelayMethodsnotEnabled(unittest.TestCase):
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestDelayMethodslowrate(unittest.TestCase):
+class TestDelayMethodslowrate(TestBase):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -161,7 +159,7 @@ class TestDelayMethodslowrate(unittest.TestCase):
     @ignore_warnings
     def setUp(self):
         os.environ['CHAOS_PARAM'] = 'test.config'
-        client.put_parameter(
+        self.ssm_client.put_parameter(
             Value="{ \"delay\": 500, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }",
             Name='test.config',
             Type='String',
@@ -170,7 +168,7 @@ class TestDelayMethodslowrate(unittest.TestCase):
 
     @ignore_warnings
     def tearDown(self):
-        client.delete_parameters(Names=['test.config'])
+        self.ssm_client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_delay(self):
@@ -183,8 +181,8 @@ class TestDelayMethodslowrate(unittest.TestCase):
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestDelayEnabledNoDelay(unittest.TestCase):
-    
+class TestDelayEnabledNoDelay(TestBase):
+
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
         self._caplog = caplog
@@ -192,7 +190,7 @@ class TestDelayEnabledNoDelay(unittest.TestCase):
     @ignore_warnings
     def setUp(self):
         os.environ['CHAOS_PARAM'] = 'test.config'
-        client.put_parameter(
+        self.ssm_client.put_parameter(
             Value="{ \"delay\": 0, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }",
             Name='test.config',
             Type='String',
@@ -201,7 +199,7 @@ class TestDelayEnabledNoDelay(unittest.TestCase):
 
     @ignore_warnings
     def tearDown(self):
-        client.delete_parameters(Names=['test.config'])
+        self.ssm_client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_delay(self):
@@ -212,7 +210,6 @@ class TestDelayEnabledNoDelay(unittest.TestCase):
             )
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
-
 
 
 if __name__ == '__main__':
