@@ -1,23 +1,11 @@
 from chaos_lambda import inject_statuscode
+from test_abstract import client, ignore_warnings
 import unittest
 import os
 import warnings
 import boto3
 import pytest
 import logging
-
-client = boto3.client('ssm', region_name='eu-north-1')
-
-os.environ['CHAOS_PARAM'] = 'test.config'
-
-
-def ignore_warnings(test_func):
-    def do_test(self, *args, **kwargs):
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore", ResourceWarning)
-            warnings.simplefilter("ignore", DeprecationWarning)
-            test_func(self, *args, **kwargs)
-    return do_test
 
 
 @inject_statuscode
