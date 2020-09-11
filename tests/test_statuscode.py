@@ -39,10 +39,6 @@ class TestStatusCodeMethods(TestBase):
         )
 
     @ignore_warnings
-    def tearDown(self):
-        self.ssm_client.delete_parameters(Names=['test.config'])
-
-    @ignore_warnings
     def test_get_statuscode(self):
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_statuscode('foo', 'bar')
@@ -76,10 +72,6 @@ class TestStatusCodeMethodslowrate(TestBase):
         )
 
     @ignore_warnings
-    def tearDown(self):
-        self.ssm_client.delete_parameters(Names=['test.config'])
-
-    @ignore_warnings
     def test_get_statuscode(self):
         response = handler_with_statuscode('foo', 'bar')
         self.assertEqual(
@@ -97,10 +89,6 @@ class TestStatusCodeMethodsnotenabled(TestBase):
             Type='String',
             Overwrite=True
         )
-
-    @ignore_warnings
-    def tearDown(self):
-        self.ssm_client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_statuscode(self):

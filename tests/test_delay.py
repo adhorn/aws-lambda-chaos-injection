@@ -1,7 +1,6 @@
 from chaos_lambda import inject_delay
 from . import TestBase, ignore_warnings
 import unittest
-import os
 import logging
 import pytest
 
@@ -38,17 +37,12 @@ class TestDelayMethods(TestBase):
 
     @ignore_warnings
     def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
         self.ssm_client.put_parameter(
             Value="{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
             Name='test.config',
             Type='String',
             Overwrite=True
         )
-
-    @ignore_warnings
-    def tearDown(self):
-        self.ssm_client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_delay(self):
@@ -98,17 +92,12 @@ class TestDelayMethodsnotEnabled(TestBase):
 
     @ignore_warnings
     def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
         self.ssm_client.put_parameter(
             Value="{ \"delay\": 0, \"isEnabled\": false, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
             Name='test.config',
             Type='String',
             Overwrite=True
         )
-
-    @ignore_warnings
-    def tearDown(self):
-        self.ssm_client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_delay(self):
@@ -158,17 +147,12 @@ class TestDelayMethodslowrate(TestBase):
 
     @ignore_warnings
     def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
         self.ssm_client.put_parameter(
             Value="{ \"delay\": 500, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }",
             Name='test.config',
             Type='String',
             Overwrite=True
         )
-
-    @ignore_warnings
-    def tearDown(self):
-        self.ssm_client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_delay(self):
@@ -189,17 +173,12 @@ class TestDelayEnabledNoDelay(TestBase):
 
     @ignore_warnings
     def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
         self.ssm_client.put_parameter(
             Value="{ \"delay\": 0, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }",
             Name='test.config',
             Type='String',
             Overwrite=True
         )
-
-    @ignore_warnings
-    def tearDown(self):
-        self.ssm_client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_delay(self):

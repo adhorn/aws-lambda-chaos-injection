@@ -9,17 +9,12 @@ class TestConfigMethods(TestBase):
 
     @ignore_warnings
     def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
         self.ssm_client.put_parameter(
             Value="{ \"delay\": 200, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }",
             Name='test.config',
             Type='String',
             Overwrite=True
         )
-
-    @ignore_warnings
-    def tearDown(self):
-        self.ssm_client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_config(self):
@@ -50,6 +45,18 @@ class TestConfigMethods(TestBase):
         with self.assertRaises(KeyError):
             get_config('dela')
 
+
+class TestWrongConfigMethods(TestBase):
+
+    @ignore_warnings
+    def setUp(self):
+        self.ssm_client.put_parameter(
+            Value="{ \"delay\": 200, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }",
+            Name='test.config',
+            Type='String',
+            Overwrite=True
+        )
+
     @ignore_warnings
     def test_get_config_bad_config(self):
         os.environ['CHAOS_PARAM'] = 'test.conf'
@@ -70,10 +77,6 @@ class TestConfigErrorMethods(TestBase):
         )
 
     @ignore_warnings
-    def tearDown(self):
-        self.ssm_client.delete_parameters(Names=['test.config'])
-
-    @ignore_warnings
     def test_get_config(self):
         with self.assertRaises(KeyError):
             get_config('error_code')
@@ -90,10 +93,6 @@ class TestConfigisEnabled(TestBase):
             Type='String',
             Overwrite=True
         )
-
-    @ignore_warnings
-    def tearDown(self):
-        self.ssm_client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_config(self):

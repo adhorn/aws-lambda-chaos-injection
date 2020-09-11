@@ -5,8 +5,9 @@ import sys
 import logging
 import warnings
 import boto3
-# import botocore
+from ssm_cache import SSMParameter
 
+SSM_CONFIG_FILE = 'test.config'
 
 # directly from here: https://github.com/boto/boto3/issues/521
 logging.getLogger('boto3').setLevel(logging.CRITICAL)
@@ -27,7 +28,7 @@ def ignore_warnings(test_func):
 
 class TestBase(unittest.TestCase):
     """ Base class with mock values and boto3 client """
-    os.environ['CHAOS_PARAM'] = 'test.config'
+    os.environ['CHAOS_PARAM'] = SSM_CONFIG_FILE
 
     ssm_client = boto3.client('ssm')
 
@@ -35,4 +36,5 @@ class TestBase(unittest.TestCase):
     def tearDownClass(cls):
         # pylint: disable=protected-access
         # reset class-level client for other tests
-        pass
+        cls.ssm_client.delete_parameters(Names=[SSM_CONFIG_FILE])
+        SSMParameter._ssm_client = None
