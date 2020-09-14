@@ -1,24 +1,8 @@
 from chaos_lambda import inject_delay
+from . import TestBase, ignore_warnings
 import unittest
-import os
-import warnings
-import boto3
 import logging
 import pytest
-
-
-client = boto3.client('ssm', region_name='eu-north-1')
-
-os.environ['CHAOS_PARAM'] = 'test.config'
-
-
-def ignore_warnings(test_func):
-    def do_test(self, *args, **kwargs):
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore", ResourceWarning)
-            warnings.simplefilter("ignore", DeprecationWarning)
-            test_func(self, *args, **kwargs)
-    return do_test
 
 
 @inject_delay
@@ -45,7 +29,7 @@ def handler_with_delay_zero(event, context):
     }
 
 
-class TestDelayMethods(unittest.TestCase):
+class TestDelayMethods(TestBase):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -53,17 +37,12 @@ class TestDelayMethods(unittest.TestCase):
 
     @ignore_warnings
     def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
-        client.put_parameter(
+        self.ssm_client.put_parameter(
             Value="{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
             Name='test.config',
             Type='String',
             Overwrite=True
         )
-
-    @ignore_warnings
-    def tearDown(self):
-        client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_delay(self):
@@ -105,7 +84,7 @@ class TestDelayMethods(unittest.TestCase):
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestDelayMethodsnotEnabled(unittest.TestCase):
+class TestDelayMethodsnotEnabled(TestBase):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -113,17 +92,12 @@ class TestDelayMethodsnotEnabled(unittest.TestCase):
 
     @ignore_warnings
     def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
-        client.put_parameter(
+        self.ssm_client.put_parameter(
             Value="{ \"delay\": 0, \"isEnabled\": false, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
             Name='test.config',
             Type='String',
             Overwrite=True
         )
-
-    @ignore_warnings
-    def tearDown(self):
-        client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_delay(self):
@@ -165,7 +139,7 @@ class TestDelayMethodsnotEnabled(unittest.TestCase):
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestDelayMethodslowrate(unittest.TestCase):
+class TestDelayMethodslowrate(TestBase):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -173,8 +147,7 @@ class TestDelayMethodslowrate(unittest.TestCase):
 
     @ignore_warnings
     def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
-        client.put_parameter(
+        self.ssm_client.put_parameter(
             Value="{ \"delay\": 500, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }",
             Name='test.config',
             Type='String',
@@ -182,10 +155,6 @@ class TestDelayMethodslowrate(unittest.TestCase):
         )
 
     @ignore_warnings
-    def tearDown(self):
-        client.delete_parameters(Names=['test.config'])
-
-    @ignore_warnings
     def test_get_delay(self):
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler('foo', 'bar')
@@ -196,16 +165,15 @@ class TestDelayMethodslowrate(unittest.TestCase):
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestDelayEnabledNoDelay(unittest.TestCase):
-    
+class TestDelayEnabledNoDelay(TestBase):
+
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
         self._caplog = caplog
 
     @ignore_warnings
     def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
-        client.put_parameter(
+        self.ssm_client.put_parameter(
             Value="{ \"delay\": 0, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }",
             Name='test.config',
             Type='String',
@@ -213,10 +181,6 @@ class TestDelayEnabledNoDelay(unittest.TestCase):
         )
 
     @ignore_warnings
-    def tearDown(self):
-        client.delete_parameters(Names=['test.config'])
-
-    @ignore_warnings
     def test_get_delay(self):
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler('foo', 'bar')
@@ -225,7 +189,6 @@ class TestDelayEnabledNoDelay(unittest.TestCase):
             )
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
-
 
 
 if __name__ == '__main__':

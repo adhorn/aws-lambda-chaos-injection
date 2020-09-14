@@ -1,37 +1,20 @@
 from chaos_lambda import get_config
 from ssm_cache import InvalidParameterError
+from . import TestBase, ignore_warnings
 import unittest
 import os
-import warnings
-import boto3
-
-client = boto3.client('ssm', region_name='eu-north-1')
 
 
-def ignore_warnings(test_func):
-    def do_test(self, *args, **kwargs):
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore", ResourceWarning)
-            warnings.simplefilter("ignore", DeprecationWarning)
-            test_func(self, *args, **kwargs)
-    return do_test
-
-
-class TestConfigMethods(unittest.TestCase):
+class TestConfigMethods(TestBase):
 
     @ignore_warnings
     def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
-        client.put_parameter(
+        self.ssm_client.put_parameter(
             Value="{ \"delay\": 200, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }",
             Name='test.config',
             Type='String',
             Overwrite=True
         )
-
-    @ignore_warnings
-    def tearDown(self):
-        client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_config(self):
@@ -62,6 +45,18 @@ class TestConfigMethods(unittest.TestCase):
         with self.assertRaises(KeyError):
             get_config('dela')
 
+
+class TestWrongConfigMethods(TestBase):
+
+    @ignore_warnings
+    def setUp(self):
+        self.ssm_client.put_parameter(
+            Value="{ \"delay\": 200, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }",
+            Name='test.config',
+            Type='String',
+            Overwrite=True
+        )
+
     @ignore_warnings
     def test_get_config_bad_config(self):
         os.environ['CHAOS_PARAM'] = 'test.conf'
@@ -69,12 +64,12 @@ class TestConfigMethods(unittest.TestCase):
             get_config('delay')
 
 
-class TestConfigErrorMethods(unittest.TestCase):
+class TestConfigErrorMethods(TestBase):
 
     @ignore_warnings
     def setUp(self):
         os.environ['CHAOS_PARAM'] = 'test.config'
-        client.put_parameter(
+        self.ssm_client.put_parameter(
             Value="{ \"delay\": 200, \"isEnabled\": true, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }",
             Name='test.config',
             Type='String',
@@ -82,30 +77,22 @@ class TestConfigErrorMethods(unittest.TestCase):
         )
 
     @ignore_warnings
-    def tearDown(self):
-        client.delete_parameters(Names=['test.config'])
-
-    @ignore_warnings
     def test_get_config(self):
         with self.assertRaises(KeyError):
             get_config('error_code')
 
 
-class TestConfigisEnabled(unittest.TestCase):
+class TestConfigisEnabled(TestBase):
 
     @ignore_warnings
     def setUp(self):
         os.environ['CHAOS_PARAM'] = 'test.config'
-        client.put_parameter(
+        self.ssm_client.put_parameter(
             Value="{ \"delay\": 200, \"isEnabled\": false, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }",
             Name='test.config',
             Type='String',
             Overwrite=True
         )
-
-    @ignore_warnings
-    def tearDown(self):
-        client.delete_parameters(Names=['test.config'])
 
     @ignore_warnings
     def test_get_config(self):
