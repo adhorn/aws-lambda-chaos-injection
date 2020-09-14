@@ -11,7 +11,6 @@ SSM_CONFIG_FILE = 'test.config'
 
 # directly from here: https://github.com/boto/boto3/issues/521
 logging.getLogger('boto3').setLevel(logging.CRITICAL)
-logging.getLogger('botocore').setLevel(logging.CRITICAL)
 
 # pylint: disable=wrong-import-order,wrong-import-position
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -27,7 +26,7 @@ def ignore_warnings(test_func):
 
 
 class TestBase(unittest.TestCase):
-    """ Base class with mock values and boto3 client """
+    """ Base class with boto3 client """
     os.environ['CHAOS_PARAM'] = SSM_CONFIG_FILE
 
     ssm_client = boto3.client('ssm')
