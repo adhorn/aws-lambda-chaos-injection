@@ -3,6 +3,7 @@ from . import TestBase, ignore_warnings
 import unittest
 import logging
 import pytest
+import sys
 
 
 @inject_delay
@@ -36,16 +37,15 @@ class TestDelayMethods(TestBase):
         self._caplog = caplog
 
     @ignore_warnings
-    def setUp(self):
-        self.ssm_client.put_parameter(
-            Value="{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
-            Name='test.config',
-            Type='String',
-            Overwrite=True
-        )
+    def _setTestUp(self, subfolder):
+        self._setUp(subfolder)
+        config = "{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }"
+        self._create_params(name='test.config', value=config)
 
     @ignore_warnings
     def test_get_delay(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler('foo', 'bar')
             assert (
@@ -59,6 +59,8 @@ class TestDelayMethods(TestBase):
 
     @ignore_warnings
     def test_get_delay_arg(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_delay_arg('foo', 'bar')
             assert (
@@ -72,6 +74,8 @@ class TestDelayMethods(TestBase):
 
     @ignore_warnings
     def test_get_delay_zero(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_delay_zero('foo', 'bar')
             assert (
@@ -91,16 +95,15 @@ class TestDelayMethodsnotEnabled(TestBase):
         self._caplog = caplog
 
     @ignore_warnings
-    def setUp(self):
-        self.ssm_client.put_parameter(
-            Value="{ \"delay\": 0, \"isEnabled\": false, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
-            Name='test.config',
-            Type='String',
-            Overwrite=True
-        )
+    def _setTestUp(self, subfolder):
+        self._setUp(subfolder)
+        config = "{ \"delay\": 0, \"isEnabled\": false, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }"
+        self._create_params(name='test.config', value=config)
 
     @ignore_warnings
     def test_get_delay(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler('foo', 'bar')
             assert (
@@ -114,6 +117,8 @@ class TestDelayMethodsnotEnabled(TestBase):
 
     @ignore_warnings
     def test_get_delay_arg(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_delay_arg('foo', 'bar')
             assert (
@@ -127,6 +132,8 @@ class TestDelayMethodsnotEnabled(TestBase):
 
     @ignore_warnings
     def test_get_delay_zero(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_delay_zero('foo', 'bar')
             assert (
@@ -146,16 +153,15 @@ class TestDelayMethodslowrate(TestBase):
         self._caplog = caplog
 
     @ignore_warnings
-    def setUp(self):
-        self.ssm_client.put_parameter(
-            Value="{ \"delay\": 500, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }",
-            Name='test.config',
-            Type='String',
-            Overwrite=True
-        )
+    def _setTestUp(self, subfolder):
+        self._setUp(subfolder)
+        config = "{ \"delay\": 500, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }"
+        self._create_params(name='test.config', value=config)
 
     @ignore_warnings
     def test_get_delay(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler('foo', 'bar')
             assert (
@@ -172,16 +178,15 @@ class TestDelayEnabledNoDelay(TestBase):
         self._caplog = caplog
 
     @ignore_warnings
-    def setUp(self):
-        self.ssm_client.put_parameter(
-            Value="{ \"delay\": 0, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }",
-            Name='test.config',
-            Type='String',
-            Overwrite=True
-        )
+    def _setTestUp(self, subfolder):
+        self._setUp(subfolder)
+        config = "{ \"delay\": 0, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }"
+        self._create_params(name='test.config', value=config)
 
     @ignore_warnings
     def test_get_delay(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler('foo', 'bar')
             assert (
