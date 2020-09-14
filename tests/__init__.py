@@ -1,7 +1,6 @@
 """ Define a test base class for all tests """
 import unittest
 import os
-import sys
 import logging
 import warnings
 import boto3
@@ -9,11 +8,7 @@ from ssm_cache import SSMParameter
 
 SSM_CONFIG_FILE = 'test.config'
 
-# directly from here: https://github.com/boto/boto3/issues/521
 logging.getLogger('boto3').setLevel(logging.CRITICAL)
-
-# pylint: disable=wrong-import-order,wrong-import-position
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 def ignore_warnings(test_func):
