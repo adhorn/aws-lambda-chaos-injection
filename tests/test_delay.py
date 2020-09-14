@@ -38,7 +38,8 @@ class TestDelayMethods(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
-        self._setUp(subfolder)
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }"
         self._create_params(name='test.config', value=config)
 
@@ -96,7 +97,8 @@ class TestDelayMethodsnotEnabled(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
-        self._setUp(subfolder)
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
         config = "{ \"delay\": 0, \"isEnabled\": false, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }"
         self._create_params(name='test.config', value=config)
 
@@ -154,7 +156,8 @@ class TestDelayMethodslowrate(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
-        self._setUp(subfolder)
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
         config = "{ \"delay\": 500, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }"
         self._create_params(name='test.config', value=config)
 
@@ -179,7 +182,8 @@ class TestDelayEnabledNoDelay(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
-        self._setUp(subfolder)
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
         config = "{ \"delay\": 0, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.000001 }"
         self._create_params(name='test.config', value=config)
 

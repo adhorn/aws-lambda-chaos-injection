@@ -28,9 +28,9 @@ class TestBase(unittest.TestCase):
     """ Base class with boto3 client """
     PLACEBO_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'placebo'))
 
-    def tearDown(self):
-        self.ssm_client.delete_parameters(Names=[SSM_CONFIG_FILE])
-        SSMParameter._ssm_client = None
+    # def tearDown(self):
+    #     self.ssm_client.delete_parameters(Names=[SSM_CONFIG_FILE])
+    #     SSMParameter._ssm_client = None
 
     def _create_params(self, name, value):
         arguments = dict(
@@ -41,12 +41,18 @@ class TestBase(unittest.TestCase):
         )
         self.ssm_client.put_parameter(**arguments)
 
-    def _setUp(self, subfolder):
+    def _setUp(self, class_name, test_name):
         os.environ['CHAOS_PARAM'] = SSM_CONFIG_FILE
         session = boto3.Session()
-        # pill = placebo.attach(session, data_path=self.PLACEBO_PATH)
-        # pill = placebo.attach(session, data_path=os.path.join(self.PLACEBO_PATH, subfolder))
-        # pill.playback()
-        # pill.record(services='ssm')
+        dir_name = os.path.join(self.PLACEBO_PATH, class_name, test_name)
+
+        try:
+            os.makedirs(dir_name)
+        except FileExistsError:
+            print("Directory ", dir_name, " already exists")
+
+        pill = placebo.attach(session, data_path=os.path.join(self.PLACEBO_PATH, class_name, test_name))
+        # pill.record()
+        pill.playback()
         self.ssm_client = session.client('ssm')
         SSMParameter.set_ssm_client(self.ssm_client)

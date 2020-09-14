@@ -10,7 +10,8 @@ class TestConfigMethods(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
-        self._setUp(subfolder)
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
         config = "{ \"delay\": 200, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }"
         self._create_params(name='test.config', value=config)
 
@@ -58,7 +59,8 @@ class TestWrongConfigMethods(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
-        self._setUp(subfolder)
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
         config = "{ \"delay\": 200, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }"
         self._create_params(name='test.config', value=config)
 
@@ -75,7 +77,8 @@ class TestConfigErrorMethods(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
-        self._setUp(subfolder)
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
         config = "{ \"delay\": 200, \"isEnabled\": true, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }"
         self._create_params(name='test.config', value=config)
 
@@ -91,7 +94,8 @@ class TestConfigisEnabled(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
-        self._setUp(subfolder)
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
         config = "{ \"delay\": 200, \"isEnabled\": false, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }"
         self._create_params(name='test.config', value=config)
 

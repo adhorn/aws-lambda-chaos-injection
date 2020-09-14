@@ -1,0 +1,20 @@
+{
+    "status_code": 200,
+    "data": {
+        "Version": 286,
+        "Tier": "Standard",
+        "ResponseMetadata": {
+            "RequestId": "35977bc1-237c-4bb1-a2da-317aeb98e6aa",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Mon, 14 Sep 2020 18:26:53 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "33",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "35977bc1-237c-4bb1-a2da-317aeb98e6aa"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

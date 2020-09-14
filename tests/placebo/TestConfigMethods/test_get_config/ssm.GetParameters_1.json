@@ -1,0 +1,38 @@
+{
+    "status_code": 200,
+    "data": {
+        "Parameters": [
+            {
+                "Name": "test.config",
+                "Type": "String",
+                "Value": "{ \"delay\": 200, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }",
+                "Version": 287,
+                "LastModifiedDate": {
+                    "__class__": "datetime",
+                    "year": 2020,
+                    "month": 9,
+                    "day": 14,
+                    "hour": 21,
+                    "minute": 26,
+                    "second": 54,
+                    "microsecond": 13000
+                },
+                "ARN": "arn:aws:ssm:eu-west-1:322549714802:parameter/test.config"
+            }
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "dec35c70-153c-42a1-a198-734cf34f80c9",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Mon, 14 Sep 2020 18:26:54 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "330",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "dec35c70-153c-42a1-a198-734cf34f80c9"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

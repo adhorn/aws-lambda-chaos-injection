@@ -30,14 +30,15 @@ class TestStatusCodeMethods(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
-        self._setUp(subfolder)
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }"
         self._create_params(name='test.config', value=config)
 
     @ignore_warnings
     def test_get_statuscode(self):
         method_name = sys._getframe().f_code.co_name
-        self._setTestUp(method_name)        
+        self._setTestUp(method_name)
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_statuscode('foo', 'bar')
             assert (
@@ -63,7 +64,8 @@ class TestStatusCodeMethodslowrate(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
-        self._setUp(subfolder)
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.0000001 }"
         self._create_params(name='test.config', value=config)
 
@@ -80,7 +82,8 @@ class TestStatusCodeMethodsnotenabled(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
-        self._setUp(subfolder)
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"isEnabled\": false, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }"
         self._create_params(name='test.config', value=config)
 
