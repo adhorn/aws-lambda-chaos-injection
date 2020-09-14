@@ -191,10 +191,6 @@ Supported Decorators:
 * `@inject_exception` - Raise an exception during the AWS Lambda execution
 * `@inject_statuscode` - force AWS Lambda to return a specific HTTP error code
 
-and the following class:
-
-* `SessionWithDelay` - enabled to sub-classing requests library and call dependencies with delay
-
 More information:
 -----------------
 
@@ -476,32 +472,3 @@ With argument::
 
         return result
     return wrapper
-
-
-class SessionWithDelay(requests.Session):
-    """
-    This is a class for injecting delay to 3rd party dependencies.
-    Subclassing the requests library is useful if you want to conduct other chaos experiments
-    within the library, like error injection or requests modification.
-    This is a simple subclassing of the parent class requests.Session to add delay to the request method.
-
-    Usage::
-
-       >>> from chaos_lambda import SessionWithDelay
-       >>> def dummy():
-       ...     session = SessionWithDelay(delay=300)
-       ...     session.get('https://stackoverflow.com/')
-       ...     pass
-       >>> dummy()
-       Added 300.00ms of delay to GET
-
-    """
-
-    def __init__(self, delay=None):
-        super(SessionWithDelay, self).__init__()
-        self.delay = delay
-
-    def request(self, method, url, *args, **kwargs):
-        LOGGER.info('Added %.2fms of delay to %s', self.delay, method)
-        time.sleep(self.delay / 1000.0)
-        return super(SessionWithDelay, self).request(method, url, *args, **kwargs)
