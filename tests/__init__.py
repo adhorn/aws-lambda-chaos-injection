@@ -14,6 +14,8 @@ SSM_CONFIG_FILE = 'test.config'
 
 logging.getLogger('boto3').setLevel(logging.CRITICAL)
 
+PLACEBO_MODE = os.environ.get('PLACEBO', 'play')
+
 
 def ignore_warnings(test_func):
     def do_test(self, *args, **kwargs):
@@ -45,14 +47,17 @@ class TestBase(unittest.TestCase):
         os.environ['CHAOS_PARAM'] = SSM_CONFIG_FILE
         session = boto3.Session()
         dir_name = os.path.join(self.PLACEBO_PATH, class_name, test_name)
-
-        try:
-            os.makedirs(dir_name)
-        except FileExistsError:
-            print("Directory already exists")
-
         pill = placebo.attach(session, data_path=os.path.join(self.PLACEBO_PATH, class_name, test_name))
-        # pill.record()
-        pill.playback()
+
+        if PLACEBO_MODE == "record":
+            try:
+                os.makedirs(dir_name)
+            except FileExistsError:
+                print("Directory already exists")
+            print("Recording")
+            pill.record()
+        else:
+            pill.playback()
+
         self.ssm_client = session.client('ssm')
         SSMParameter.set_ssm_client(self.ssm_client)
