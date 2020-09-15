@@ -49,7 +49,7 @@ class TestBase(unittest.TestCase):
         try:
             os.makedirs(dir_name)
         except FileExistsError:
-            print("Directory ", dir_name, " already exists")
+            print("Directory already exists")
 
         pill = placebo.attach(session, data_path=os.path.join(self.PLACEBO_PATH, class_name, test_name))
         # pill.record()

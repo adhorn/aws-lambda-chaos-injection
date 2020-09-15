@@ -204,7 +204,6 @@ import time
 import logging
 import random
 import json
-import requests
 from ssm_cache import SSMParameter
 from ssm_cache.cache import InvalidParameterError
 
