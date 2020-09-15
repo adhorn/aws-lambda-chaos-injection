@@ -5,6 +5,10 @@ import logging
 import warnings
 import boto3
 from ssm_cache import SSMParameter
+import placebo
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 SSM_CONFIG_FILE = 'test.config'
 
@@ -22,13 +26,33 @@ def ignore_warnings(test_func):
 
 class TestBase(unittest.TestCase):
     """ Base class with boto3 client """
-    os.environ['CHAOS_PARAM'] = SSM_CONFIG_FILE
+    PLACEBO_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'placebo'))
 
-    ssm_client = boto3.client('ssm')
+    # def tearDown(self):
+    #     self.ssm_client.delete_parameters(Names=[SSM_CONFIG_FILE])
+    #     SSMParameter._ssm_client = None
 
-    @classmethod
-    def tearDownClass(cls):
-        # pylint: disable=protected-access
-        # reset class-level client for other tests
-        cls.ssm_client.delete_parameters(Names=[SSM_CONFIG_FILE])
-        SSMParameter._ssm_client = None
+    def _create_params(self, name, value):
+        arguments = dict(
+            Name=name,
+            Value=value,
+            Type="String",
+            Overwrite=True,
+        )
+        self.ssm_client.put_parameter(**arguments)
+
+    def _setUp(self, class_name, test_name):
+        os.environ['CHAOS_PARAM'] = SSM_CONFIG_FILE
+        session = boto3.Session()
+        dir_name = os.path.join(self.PLACEBO_PATH, class_name, test_name)
+
+        try:
+            os.makedirs(dir_name)
+        except FileExistsError:
+            print("Directory already exists")
+
+        pill = placebo.attach(session, data_path=os.path.join(self.PLACEBO_PATH, class_name, test_name))
+        # pill.record()
+        pill.playback()
+        self.ssm_client = session.client('ssm')
+        SSMParameter.set_ssm_client(self.ssm_client)

@@ -1,9 +1,9 @@
 from chaos_lambda import inject_statuscode
 from . import TestBase, ignore_warnings
 import unittest
-import os
 import pytest
 import logging
+import sys
 
 
 @inject_statuscode
@@ -29,17 +29,16 @@ class TestStatusCodeMethods(TestBase):
         self._caplog = caplog
 
     @ignore_warnings
-    def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
-        self.ssm_client.put_parameter(
-            Value="{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
-            Name='test.config',
-            Type='String',
-            Overwrite=True
-        )
+    def _setTestUp(self, subfolder):
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
+        config = "{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }"
+        self._create_params(name='test.config', value=config)
 
     @ignore_warnings
     def test_get_statuscode(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_statuscode('foo', 'bar')
             assert (
@@ -50,6 +49,8 @@ class TestStatusCodeMethods(TestBase):
 
     @ignore_warnings
     def test_get_statuscode_arg(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         with self._caplog.at_level(logging.DEBUG, logger="chaos_lambda"):
             response = handler_with_statuscode_arg('foo', 'bar')
             assert (
@@ -62,17 +63,16 @@ class TestStatusCodeMethods(TestBase):
 class TestStatusCodeMethodslowrate(TestBase):
 
     @ignore_warnings
-    def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
-        self.ssm_client.put_parameter(
-            Value="{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.0000001 }",
-            Name='test.config',
-            Type='String',
-            Overwrite=True
-        )
+    def _setTestUp(self, subfolder):
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
+        config = "{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.0000001 }"
+        self._create_params(name='test.config', value=config)
 
     @ignore_warnings
     def test_get_statuscode(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         response = handler_with_statuscode('foo', 'bar')
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
@@ -81,23 +81,24 @@ class TestStatusCodeMethodslowrate(TestBase):
 class TestStatusCodeMethodsnotenabled(TestBase):
 
     @ignore_warnings
-    def setUp(self):
-        os.environ['CHAOS_PARAM'] = 'test.config'
-        self.ssm_client.put_parameter(
-            Value="{ \"delay\": 400, \"isEnabled\": false, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
-            Name='test.config',
-            Type='String',
-            Overwrite=True
-        )
+    def _setTestUp(self, subfolder):
+        class_name = self.__class__.__name__
+        self._setUp(class_name, subfolder)
+        config = "{ \"delay\": 400, \"isEnabled\": false, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }"
+        self._create_params(name='test.config', value=config)
 
     @ignore_warnings
     def test_get_statuscode(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         response = handler_with_statuscode('foo', 'bar')
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
     @ignore_warnings
     def handler_with_statuscode_arg(self):
+        method_name = sys._getframe().f_code.co_name
+        self._setTestUp(method_name)
         response = handler_with_statuscode_arg('foo', 'bar')
         self.assertEqual(
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")

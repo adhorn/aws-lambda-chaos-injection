@@ -189,10 +189,6 @@ Supported Decorators:
 * `@inject_exception` - Raise an exception during the AWS Lambda execution
 * `@inject_statuscode` - force AWS Lambda to return a specific HTTP error code
 
-and the following class:
-
-* `SessionWithDelay` - enabled to sub-classing requests library and call dependencies with delay
-
 More information:
 -----------------
 
