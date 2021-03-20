@@ -16,7 +16,7 @@ future==0.18.2
 idna==2.9
 imagesize==1.2.0
 importlib-metadata==1.6.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 jmespath==0.9.5
 keyring==21.2.1
 MarkupSafe==1.1.1
