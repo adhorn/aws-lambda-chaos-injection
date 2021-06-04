@@ -39,5 +39,5 @@ sphinxcontrib-serializinghtml==1.1.4
 ssm-cache==2.9
 toml==0.10.2
 typing-extensions==3.7.4.3
-urllib3==1.26.4
+urllib3==1.26.5
 zipp==3.4.1
