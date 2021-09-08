@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "a243ba11-154c-4013-9963-723c967f316c",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:02 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "a243ba11-154c-4013-9963-723c967f316c"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "2xb9y4k",
+        "Id": "hkn4xqh",
+        "Name": "Testvuvmh",
+        "State": "ReadyForDeployment"
+    }
+}

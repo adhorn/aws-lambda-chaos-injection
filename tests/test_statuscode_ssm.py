@@ -1,9 +1,10 @@
 from chaos_lambda import inject_fault
-from . import TestBase, ignore_warnings
+from . import TestBaseSSM, ignore_warnings
 import unittest
 import pytest
 import logging
 import sys
+import os
 
 
 @inject_fault
@@ -14,7 +15,7 @@ def handler_with_statuscode(event, context):
     }
 
 
-class TestStatusCodeMethods(TestBase):
+class TestStatusCodeMethods(TestBaseSSM):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -25,7 +26,7 @@ class TestStatusCodeMethods(TestBase):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"fault_type\": \"status_code\"}"
-        self._create_params(name='test.config', value=config)
+        self._create_params(name=os.environ['CHAOS_PARAM'], value=config)
 
     @ignore_warnings
     def test_get_statuscode(self):
@@ -40,14 +41,14 @@ class TestStatusCodeMethods(TestBase):
             str(response), "{'statusCode': 404, 'body': 'Hello from Lambda!'}")
 
 
-class TestStatusCodeMethodslowrate(TestBase):
+class TestStatusCodeMethodslowrate(TestBaseSSM):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.0000001, \"fault_type\": \"status_code\"}"
-        self._create_params(name='test.config', value=config)
+        self._create_params(name=os.environ['CHAOS_PARAM'], value=config)
 
     @ignore_warnings
     def test_statuscode_low_rate(self):
@@ -58,14 +59,14 @@ class TestStatusCodeMethodslowrate(TestBase):
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestStatusCodeMethodsnotenabled(TestBase):
+class TestStatusCodeMethodsnotenabled(TestBaseSSM):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"is_enabled\": false, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"fault_type\": \"status_code\"}"
-        self._create_params(name='test.config', value=config)
+        self._create_params(name=os.environ['CHAOS_PARAM'], value=config)
 
     @ignore_warnings
     def test_statuscode_not_enabled(self):
@@ -76,7 +77,7 @@ class TestStatusCodeMethodsnotenabled(TestBase):
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestStatusCodeNoError_Code(TestBase):
+class TestStatusCodeNoError_Code(TestBaseSSM):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -87,7 +88,7 @@ class TestStatusCodeNoError_Code(TestBase):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"is_enabled\": false, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"fault_type\": \"status_code\"}"
-        self._create_params(name='test.config', value=config)
+        self._create_params(name=os.environ['CHAOS_PARAM'], value=config)
 
     @ignore_warnings
     def test_statuscode_not_enabled(self):
@@ -102,7 +103,7 @@ class TestStatusCodeNoError_Code(TestBase):
             str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestErrorCodeNotValid(TestBase):
+class TestErrorCodeNotValid(TestBaseSSM):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -113,7 +114,7 @@ class TestErrorCodeNotValid(TestBase):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"is_enabled\": true, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"error_code\": \"error\", \"fault_type\": \"status_code\"}"
-        self._create_params(name='test.config', value=config)
+        self._create_params(name=os.environ['CHAOS_PARAM'], value=config)
 
     @ignore_warnings
     def test_errorcode_not_valid(self):

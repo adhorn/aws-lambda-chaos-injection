@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "cee4fff7-2e4b-46d1-bad2-1af23d1b9029",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:23 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "cee4fff7-2e4b-46d1-bad2-1af23d1b9029"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "88m071l",
+        "Id": "jvlyuvs",
+        "Name": "Testdvxwy",
+        "State": "ReadyForDeployment"
+    }
+}

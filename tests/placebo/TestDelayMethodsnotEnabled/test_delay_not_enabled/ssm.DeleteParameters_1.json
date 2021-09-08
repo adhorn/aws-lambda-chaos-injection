@@ -1,0 +1,22 @@
+{
+    "status_code": 200,
+    "data": {
+        "DeletedParameters": [
+            "test.configpxvmo"
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "1a03ca99-b0da-43e0-9161-3ce386986c82",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Tue, 28 Sep 2021 06:30:10 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "65",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "1a03ca99-b0da-43e0-9161-3ce386986c82"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

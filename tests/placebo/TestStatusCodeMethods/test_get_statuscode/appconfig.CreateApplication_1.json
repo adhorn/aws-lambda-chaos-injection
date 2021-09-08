@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "49ae33f9-25ac-4d56-b477-77a273e8dada",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:56 GMT",
+                "content-type": "application/json",
+                "content-length": "67",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "49ae33f9-25ac-4d56-b477-77a273e8dada"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "hy4mcf1",
+        "Name": "Test-Chaos-Configsbsnd"
+    }
+}

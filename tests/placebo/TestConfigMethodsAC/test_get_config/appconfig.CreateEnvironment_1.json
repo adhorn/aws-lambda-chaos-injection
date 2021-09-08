@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "f2716ba1-7d81-4fb8-b18c-7b294ae4950c",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:42 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "f2716ba1-7d81-4fb8-b18c-7b294ae4950c"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "rnff0ll",
+        "Id": "k154zfg",
+        "Name": "Testyzyur",
+        "State": "ReadyForDeployment"
+    }
+}
