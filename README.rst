@@ -56,82 +56,42 @@ Example
     # function.py
 
     import os
-    from chaos_lambda import inject_delay, inject_exception, inject_statuscode
+    from chaos_lambda import inject_fault
 
     # this should be set as a Lambda environment variable
     os.environ['CHAOS_PARAM'] = 'chaoslambda.config'
 
-    @inject_exception
-    def handler_with_exception(event, context):
+    @inject_fault
+    def handler(event, context):
         return {
             'statusCode': 200,
             'body': 'Hello from Lambda!'
         }
 
+Considering a configuration as follows:
 
-    @inject_exception(exception_type=TypeError, exception_msg='foobar')
-    def handler_with_exception_arg(event, context):
-        return {
-            'statusCode': 200,
-            'body': 'Hello from Lambda!'
-        }
+.. code:: json
 
-    @inject_exception(exception_type=ValueError)
-    def handler_with_exception_arg_2(event, context):
-        return {
-            'statusCode': 200,
-            'body': 'Hello from Lambda!'
-        }
+    {
+        "fault_type": "exception",
+        "delay": 400,
+        "is_enabled": true,
+        "error_code": 404,
+        "exception_msg": "This is chaos",
+        "rate": 1
+    }
 
-
-    @inject_statuscode
-    def handler_with_statuscode(event, context):
-        return {
-            'statusCode': 200,
-            'body': 'Hello from Lambda!'
-        }
-
-    @inject_statuscode(error_code=400)
-    def handler_with_statuscode_arg(event, context):
-        return {
-            'statusCode': 200,
-            'body': 'Hello from Lambda!'
-        }
-
-    @inject_delay
-    def handler_with_delay(event, context):
-        return {
-            'statusCode': 200,
-            'body': 'Hello from Lambda!'
-        }
-
-    @inject_delay(delay=1000)
-    def handler_with_delay_arg(event, context):
-        return {
-            'statusCode': 200,
-            'body': 'Hello from Lambda!'
-        }
-
-
-    @inject_delay(delay=0)
-    def handler_with_delay_zero(event, context):
-        return {
-            'statusCode': 200,
-            'body': 'Hello from Lambda!'
-        }
-
-
-When excecuted, the Lambda function, e.g ``handler_with_exception('foo', 'bar')``, will produce the following result:
+When excecuted, the Lambda function, e.g ``handler('foo', 'bar')``, will produce the following result:
 
 .. code:: shell
 
-    exception_msg from config I really failed seriously with a rate of 1
+    exception_msg from config chaos with a rate of 1
     corrupting now
     Traceback (most recent call last):
     File "<stdin>", line 1, in <module>
     File "/.../chaos_lambda.py", line 199, in wrapper
         raise Exception(exception_msg)
-    Exception: I really failed seriously
+    Exception: This is chaos
 
 Configuration
 -------------
@@ -142,10 +102,11 @@ function:
 .. code:: json
 
     {
-        "isEnabled": true,
+        "fault_type": "exception",
         "delay": 400,
+        "is_enabled": true,
         "error_code": 404,
-        "exception_msg": "I really failed seriously",
+        "exception_msg": "This is chaos",
         "rate": 1
     }
 
@@ -153,7 +114,7 @@ To store the above configuration into SSM using the `AWS CLI <https://aws.amazon
 
 .. code:: shell
 
-    aws ssm put-parameter --region eu-north-1 --name chaoslambda.config --type String --overwrite --value "{ "delay": 400, "isEnabled": true, "error_code": 404, "exception_msg": "I really failed seriously", "rate": 1 }"
+    aws ssm put-parameter --name chaoslambda.config --type String --overwrite --value "{ "delay": 400, "is_enabled": true, "error_code": 404, "exception_msg": "This is chaos", "rate": 1, "fault_type": "exception"}" --region eu-west-1
 
 AWS Lambda will need to have `IAM access to SSM <https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-access.html>`_.
 
@@ -181,13 +142,13 @@ AWS Lambda will need to have `IAM access to SSM <https://docs.aws.amazon.com/sys
     }
 
 
-Supported Decorators:
+Supported Faults:
 ---------------------
-``chaos_lambda`` currently supports the following decorators:
+``chaos_lambda`` currently supports the following faults:
 
-* `@inject_delay` - add delay in the AWS Lambda execution
-* `@inject_exception` - Raise an exception during the AWS Lambda execution
-* `@inject_statuscode` - force AWS Lambda to return a specific HTTP error code
+* `latency` - Add latency in the AWS Lambda execution
+* `exception` - Raise an exception during the AWS Lambda execution
+* `status_code` - force AWS Lambda to return a specific HTTP error code
 
 More information:
 -----------------

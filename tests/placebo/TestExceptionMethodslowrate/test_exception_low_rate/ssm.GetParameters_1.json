@@ -5,17 +5,17 @@
             {
                 "Name": "test.config",
                 "Type": "String",
-                "Value": "{ \"delay\": 400, \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"fault_type\": \"status_code\"}",
-                "Version": 857,
+                "Value": "{ \"delay\": 400, \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.0000001, \"fault_type\": \"exception\"}",
+                "Version": 851,
                 "LastModifiedDate": {
                     "__class__": "datetime",
                     "year": 2021,
                     "month": 9,
                     "day": 8,
-                    "hour": 10,
-                    "minute": 0,
-                    "second": 1,
-                    "microsecond": 18000
+                    "hour": 9,
+                    "minute": 59,
+                    "second": 58,
+                    "microsecond": 471000
                 },
                 "ARN": "arn:aws:ssm:eu-west-1:322549714802:parameter/test.config",
                 "DataType": "text"
@@ -23,15 +23,15 @@
         ],
         "InvalidParameters": [],
         "ResponseMetadata": {
-            "RequestId": "c33a585f-692b-427c-905e-920237ae9e75",
+            "RequestId": "264a1401-245f-4704-bebd-32fe457820f4",
             "HTTPStatusCode": 200,
             "HTTPHeaders": {
                 "server": "Server",
-                "date": "Wed, 08 Sep 2021 07:00:01 GMT",
+                "date": "Wed, 08 Sep 2021 06:59:58 GMT",
                 "content-type": "application/x-amz-json-1.1",
-                "content-length": "366",
+                "content-length": "372",
                 "connection": "keep-alive",
-                "x-amzn-requestid": "c33a585f-692b-427c-905e-920237ae9e75"
+                "x-amzn-requestid": "264a1401-245f-4704-bebd-32fe457820f4"
             },
             "RetryAttempts": 0
         }

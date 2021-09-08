@@ -12,47 +12,20 @@ class TestConfigMethods(TestBase):
     def _setTestUp(self, subfolder):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
-        config = "{ \"delay\": 200, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }"
+        config = "{ \"delay\": 200, \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.5, \"fault_type\": \"latency\"}"
         self._create_params(name='test.config', value=config)
 
     @ignore_warnings
     def test_get_config(self):
         method_name = sys._getframe().f_code.co_name
         self._setTestUp(method_name)
-        isEnabled, rate = get_config('isEnabled')
-        self.assertEqual(isEnabled, True or False)
-        self.assertEqual(rate, 0.5)
-
-    @ignore_warnings
-    def test_get_config_delay(self):
-        method_name = sys._getframe().f_code.co_name
-        self._setTestUp(method_name)
-        delay, rate = get_config('delay')
-        self.assertEqual(delay, 200)
-        self.assertEqual(rate, 0.5)
-
-    @ignore_warnings
-    def test_get_config_error_code(self):
-        method_name = sys._getframe().f_code.co_name
-        self._setTestUp(method_name)
-        error_code, rate = get_config('error_code')
-        self.assertEqual(error_code, 404)
-        self.assertEqual(rate, 0.5)
-
-    @ignore_warnings
-    def test_get_config_rate(self):
-        method_name = sys._getframe().f_code.co_name
-        self._setTestUp(method_name)
-        rate, rate = get_config('rate')
-        self.assertEqual(rate, 0.5)
-        self.assertEqual(rate, 0.5)
-
-    @ignore_warnings
-    def test_get_config_bad_key(self):
-        method_name = sys._getframe().f_code.co_name
-        self._setTestUp(method_name)
-        with self.assertRaises(KeyError):
-            get_config('dela')
+        _config = get_config()
+        self.assertEqual(_config.get("is_enabled"), True or False)
+        self.assertEqual(_config.get("rate"), 0.5)
+        self.assertEqual(_config.get("delay"), 200)
+        self.assertEqual(_config.get("error_code"), 404)
+        self.assertEqual(_config.get("exception_msg"), "This is chaos")
+        self.assertEqual(_config.get("fault_type"), "latency")
 
 
 class TestWrongConfigMethods(TestBase):
@@ -61,51 +34,34 @@ class TestWrongConfigMethods(TestBase):
     def _setTestUp(self, subfolder):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
-        config = "{ \"delay\": 200, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }"
+        config = "{ \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.5, \"fault_type\": \"latency\"}"
         self._create_params(name='test.config', value=config)
 
     @ignore_warnings
-    def test_get_config_bad_config(self):
+    def test_bad_config(self):
         method_name = sys._getframe().f_code.co_name
         self._setTestUp(method_name)
         os.environ['CHAOS_PARAM'] = 'test.conf'
         with self.assertRaises(InvalidParameterError):
-            get_config('delay')
+            _config = get_config()
+            self.assertNotEqual(_config.get("is_enabled"), True or False)
 
 
-class TestConfigErrorMethods(TestBase):
-
-    @ignore_warnings
-    def _setTestUp(self, subfolder):
-        class_name = self.__class__.__name__
-        self._setUp(class_name, subfolder)
-        config = "{ \"delay\": 200, \"isEnabled\": true, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }"
-        self._create_params(name='test.config', value=config)
-
-    @ignore_warnings
-    def test_get_config(self):
-        method_name = sys._getframe().f_code.co_name
-        self._setTestUp(method_name)
-        with self.assertRaises(KeyError):
-            get_config('error_code')
-
-
-class TestConfigisEnabled(TestBase):
+class TestConfigNotEnabled(TestBase):
 
     @ignore_warnings
     def _setTestUp(self, subfolder):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
-        config = "{ \"delay\": 200, \"isEnabled\": false, \"exception_msg\": \"I FAILED\", \"rate\": 0.5 }"
+        config = "{ \"delay\": 200, \"is_enabled\": false, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.5, \"fault_type\": \"latency\"}"
         self._create_params(name='test.config', value=config)
 
     @ignore_warnings
-    def test_get_config(self):
+    def test_config_not_enabled(self):
         method_name = sys._getframe().f_code.co_name
         self._setTestUp(method_name)
-        delay, rate = get_config('error_code')
-        self.assertEqual(delay, 0)
-        self.assertEqual(rate, 0)
+        _config = get_config()
+        self.assertEqual(_config, 0)
 
 
 if __name__ == '__main__':
