@@ -5,32 +5,33 @@
             {
                 "Name": "test.config",
                 "Type": "String",
-                "Value": "{ \"delay\": 400, \"isEnabled\": true, \"error_code\": 404, \"exception_msg\": \"I FAILED\", \"rate\": 1 }",
-                "Version": 273,
+                "Value": "{ \"delay\": 400, \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"fault_type\": \"latency\"}",
+                "Version": 845,
                 "LastModifiedDate": {
                     "__class__": "datetime",
-                    "year": 2020,
+                    "year": 2021,
                     "month": 9,
-                    "day": 14,
-                    "hour": 21,
-                    "minute": 26,
-                    "second": 45,
-                    "microsecond": 367000
+                    "day": 8,
+                    "hour": 9,
+                    "minute": 59,
+                    "second": 55,
+                    "microsecond": 529000
                 },
-                "ARN": "arn:aws:ssm:eu-west-1:322549714802:parameter/test.config"
+                "ARN": "arn:aws:ssm:eu-west-1:322549714802:parameter/test.config",
+                "DataType": "text"
             }
         ],
         "InvalidParameters": [],
         "ResponseMetadata": {
-            "RequestId": "5fd4d38d-afca-4052-9381-b53d463ed61b",
+            "RequestId": "922ed129-59c8-4a9e-baab-e90f245f0ab1",
             "HTTPStatusCode": 200,
             "HTTPHeaders": {
                 "server": "Server",
-                "date": "Mon, 14 Sep 2020 18:26:45 GMT",
+                "date": "Wed, 08 Sep 2021 06:59:55 GMT",
                 "content-type": "application/x-amz-json-1.1",
-                "content-length": "328",
+                "content-length": "362",
                 "connection": "keep-alive",
-                "x-amzn-requestid": "5fd4d38d-afca-4052-9381-b53d463ed61b"
+                "x-amzn-requestid": "922ed129-59c8-4a9e-baab-e90f245f0ab1"
             },
             "RetryAttempts": 0
         }
