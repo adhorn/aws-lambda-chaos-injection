@@ -1,0 +1,16 @@
+{
+    "status_code": 204,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "01b0cd26-b689-4bc6-b53a-d84e4f25a4b6",
+            "HTTPStatusCode": 204,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:29:54 GMT",
+                "content-type": "application/json",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "01b0cd26-b689-4bc6-b53a-d84e4f25a4b6"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

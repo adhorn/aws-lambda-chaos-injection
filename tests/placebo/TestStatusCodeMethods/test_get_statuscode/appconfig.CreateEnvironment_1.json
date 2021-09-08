@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "88c61a12-a638-41af-b399-81f977f95087",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:56 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "88c61a12-a638-41af-b399-81f977f95087"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "hy4mcf1",
+        "Id": "0eyehpe",
+        "Name": "Testvgbdl",
+        "State": "ReadyForDeployment"
+    }
+}

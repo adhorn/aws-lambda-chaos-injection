@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "c9bd8d4d-0d98-4783-a632-a44988bd0033",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:31:05 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "c9bd8d4d-0d98-4783-a632-a44988bd0033"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "q2fu7le",
+        "Id": "f6mjmen",
+        "Name": "Testgpltf",
+        "State": "ReadyForDeployment"
+    }
+}

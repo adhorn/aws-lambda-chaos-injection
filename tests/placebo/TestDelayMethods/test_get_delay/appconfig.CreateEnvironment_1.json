@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "59402800-a02c-43d2-ad82-3eb82c0adfe2",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:29:41 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "59402800-a02c-43d2-ad82-3eb82c0adfe2"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "cvmhl0o",
+        "Id": "p6p0594",
+        "Name": "Testfcbxp",
+        "State": "ReadyForDeployment"
+    }
+}

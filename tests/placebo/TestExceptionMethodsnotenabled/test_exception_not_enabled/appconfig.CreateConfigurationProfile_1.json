@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "c8e19132-9eac-4809-b1e1-7c55b9caa4ee",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:23 GMT",
+                "content-type": "application/json",
+                "content-length": "168",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "c8e19132-9eac-4809-b1e1-7c55b9caa4ee"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "88m071l",
+        "Id": "vueg169",
+        "Name": "TestChaosConfigeuwrx",
+        "LocationUri": "hosted"
+    }
+}

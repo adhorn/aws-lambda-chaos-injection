@@ -1,0 +1,22 @@
+{
+    "status_code": 200,
+    "data": {
+        "DeletedParameters": [
+            "test.configtibnb"
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "33573047-6f53-4991-aff5-e74adf0dfdd1",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Tue, 28 Sep 2021 06:30:35 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "65",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "33573047-6f53-4991-aff5-e74adf0dfdd1"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

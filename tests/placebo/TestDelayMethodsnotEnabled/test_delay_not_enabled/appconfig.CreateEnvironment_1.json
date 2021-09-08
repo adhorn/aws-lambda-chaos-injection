@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "24667c48-8e36-428a-a32a-9a001adfdba7",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:29:47 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "24667c48-8e36-428a-a32a-9a001adfdba7"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "3fqp2vt",
+        "Id": "bwfmspk",
+        "Name": "Testwhorz",
+        "State": "ReadyForDeployment"
+    }
+}

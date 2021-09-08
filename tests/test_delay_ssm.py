@@ -1,9 +1,10 @@
 from chaos_lambda import inject_fault
-from . import TestBase, ignore_warnings
+from . import TestBaseSSM, ignore_warnings
 import unittest
 import logging
 import pytest
 import sys
+import os
 
 
 @inject_fault
@@ -14,7 +15,7 @@ def handler(event, context):
     }
 
 
-class TestDelayMethods(TestBase):
+class TestDelayMethods(TestBaseSSM):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -25,7 +26,7 @@ class TestDelayMethods(TestBase):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"fault_type\": \"latency\"}"
-        self._create_params(name='test.config', value=config)
+        self._create_params(name=os.environ['CHAOS_PARAM'], value=config)
 
     @ignore_warnings
     def test_get_delay(self):
@@ -39,11 +40,11 @@ class TestDelayMethods(TestBase):
             assert (
                 'sleeping now' in self._caplog.text
             )
-        self.assertEqual(
-            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+            self.assertEqual(
+                str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestDelayMethodsnotEnabled(TestBase):
+class TestDelayMethodsnotEnabled(TestBaseSSM):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -54,7 +55,7 @@ class TestDelayMethodsnotEnabled(TestBase):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"is_enabled\": false, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"fault_type\": \"latency\"}"
-        self._create_params(name='test.config', value=config)
+        self._create_params(name=os.environ['CHAOS_PARAM'], value=config)
 
     @ignore_warnings
     def test_delay_not_enabled(self):
@@ -68,11 +69,11 @@ class TestDelayMethodsnotEnabled(TestBase):
             assert (
                 'sleeping now' not in self._caplog.text
             )
-        self.assertEqual(
-            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+            self.assertEqual(
+                str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestDelayMethodslowrate(TestBase):
+class TestDelayMethodslowrate(TestBaseSSM):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -83,7 +84,7 @@ class TestDelayMethodslowrate(TestBase):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
         config = "{ \"delay\": 400, \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.000001, \"fault_type\": \"latency\"}"
-        self._create_params(name='test.config', value=config)
+        self._create_params(name=os.environ['CHAOS_PARAM'], value=config)
 
     @ignore_warnings
     def test_delay_low_rate(self):
@@ -94,11 +95,11 @@ class TestDelayMethodslowrate(TestBase):
             assert (
                 'sleeping now' not in self._caplog.text
             )
-        self.assertEqual(
-            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+            self.assertEqual(
+                str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestDelayEnabledNoDelay(TestBase):
+class TestDelayEnabledNoDelay(TestBaseSSM):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -109,7 +110,7 @@ class TestDelayEnabledNoDelay(TestBase):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
         config = "{ \"delay\": 0, \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.000001, \"fault_type\": \"latency\"}"
-        self._create_params(name='test.config', value=config)
+        self._create_params(name=os.environ['CHAOS_PARAM'], value=config)
 
     @ignore_warnings
     def test_delay_zero(self):
@@ -120,11 +121,11 @@ class TestDelayEnabledNoDelay(TestBase):
             assert (
                 'sleeping now' not in self._caplog.text
             )
-        self.assertEqual(
-            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+            self.assertEqual(
+                str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
-class TestDelayEnabledDelayNotInt(TestBase):
+class TestDelayEnabledDelayNotInt(TestBaseSSM):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
@@ -135,7 +136,7 @@ class TestDelayEnabledDelayNotInt(TestBase):
         class_name = self.__class__.__name__
         self._setUp(class_name, subfolder)
         config = "{ \"delay\": \"boo\", \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.000001, \"fault_type\": \"latency\"}"
-        self._create_params(name='test.config', value=config)
+        self._create_params(name=os.environ['CHAOS_PARAM'], value=config)
 
     @ignore_warnings
     def test_delay_not_int(self):
@@ -148,9 +149,9 @@ class TestDelayEnabledDelayNotInt(TestBase):
             )
             assert (
                 'Parameter delay is no valid int' in self._caplog.text
-            )   
-        self.assertEqual(
-            str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
+            )
+            self.assertEqual(
+                str(response), "{'statusCode': 200, 'body': 'Hello from Lambda!'}")
 
 
 if __name__ == '__main__':

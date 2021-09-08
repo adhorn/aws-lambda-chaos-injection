@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "bec58e40-bdf5-41d0-ad16-1d989df7566e",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:31:09 GMT",
+                "content-type": "application/json",
+                "content-length": "168",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "bec58e40-bdf5-41d0-ad16-1d989df7566e"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "cgis17p",
+        "Id": "qwkysl9",
+        "Name": "TestChaosConfigsopqx",
+        "LocationUri": "hosted"
+    }
+}

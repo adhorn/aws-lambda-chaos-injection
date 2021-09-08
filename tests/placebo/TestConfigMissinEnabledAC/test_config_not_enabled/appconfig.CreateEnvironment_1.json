@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "8d0a1e5b-1bed-4036-bb29-48907db361a1",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:52 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "8d0a1e5b-1bed-4036-bb29-48907db361a1"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "uzga1z7",
+        "Id": "ztsexco",
+        "Name": "Testrivkw",
+        "State": "ReadyForDeployment"
+    }
+}

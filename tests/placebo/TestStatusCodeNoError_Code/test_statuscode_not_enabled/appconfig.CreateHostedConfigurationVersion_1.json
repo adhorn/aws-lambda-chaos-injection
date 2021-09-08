@@ -1,0 +1,29 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "ce156b9d-1234-4716-b951-39672c81d974",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:31:09 GMT",
+                "content-type": "application/json",
+                "content-length": "110",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "ce156b9d-1234-4716-b951-39672c81d974",
+                "configuration-profile-id": "qwkysl9",
+                "application-id": "cgis17p",
+                "version-number": "1"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "cgis17p",
+        "ConfigurationProfileId": "qwkysl9",
+        "VersionNumber": "1",
+        "ContentType": "application/json",
+        "Content": {
+            "__class__": "StreamingBody",
+            "__module__": "botocore.response",
+            "body": "eyAiZGVsYXkiOiA0MDAsICJpc19lbmFibGVkIjogZmFsc2UsICJleGNlcHRpb25fbXNnIjogIlRoaXMgaXMgY2hhb3MiLCAicmF0ZSI6IDEsICJmYXVsdF90eXBlIjogInN0YXR1c19jb2RlIn0="
+        }
+    }
+}
