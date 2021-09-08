@@ -31,15 +31,14 @@ Chaos Injection for AWS Lambda - chaos_lambda
 
 ``chaos_lambda`` is a small library injecting chaos into `AWS Lambda
 <https://aws.amazon.com/lambda/>`_.
-It offers simple python decorators to do `delay`, `exception` and `statusCode` injection
-and a Class to add `delay` to any 3rd party dependencies called from your function.
+It offers simple python decorators to do `delay`, `exception` and `statusCode` injection for your AWS Lambda function.
 This allows to conduct small chaos engineering experiments for your serverless application
 in the `AWS Cloud <https://aws.amazon.com>`_.
 
-* Support for Latency injection using ``delay``
-* Support for Exception injection using ``exception_msg``
-* Support for HTTP Error status code injection using ``error_code``
-* Using for SSM Parameter Store to control the experiment using ``isEnabled``
+* Support for Latency injection using ``fault_type: latency``
+* Support for Exception injection using ``fault_type: exception``
+* Support for HTTP Error status code injection using ``fault_type: status_code``
+* Using for SSM Parameter Store to control the experiment using ``is_enabled: true``
 * Support for adding rate of failure using ``rate``. (Default rate = 1)
 * Per Lambda function injection control using Environment variable (``CHAOS_PARAM``)
 
