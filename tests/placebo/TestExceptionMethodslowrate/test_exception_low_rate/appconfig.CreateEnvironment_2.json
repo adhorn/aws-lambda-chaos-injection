@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "c6f76cb6-1541-4dd2-9c39-d97144571c43",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:47:57 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "c6f76cb6-1541-4dd2-9c39-d97144571c43"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "u8gfkob",
+        "Id": "iw88kia",
+        "Name": "Testpplun",
+        "State": "ReadyForDeployment"
+    }
+}

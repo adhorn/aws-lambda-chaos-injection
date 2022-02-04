@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "79119a35-7b70-401d-9285-40866f695a97",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:48:38 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "79119a35-7b70-401d-9285-40866f695a97"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "zbqaj38",
+        "Id": "xg83sql",
+        "Name": "Testzujti",
+        "State": "ReadyForDeployment"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "d67ea186-1901-45cc-bcd1-d9b461a6051c",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:47:37 GMT",
+                "content-type": "application/json",
+                "content-length": "67",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "d67ea186-1901-45cc-bcd1-d9b461a6051c"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "j4dw8l1",
+        "Name": "Test-Chaos-Configaixsi"
+    }
+}

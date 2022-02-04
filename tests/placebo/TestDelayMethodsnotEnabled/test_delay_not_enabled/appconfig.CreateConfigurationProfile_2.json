@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "23883f19-383a-4538-8cbf-c189655c15bb",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:47:28 GMT",
+                "content-type": "application/json",
+                "content-length": "168",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "23883f19-383a-4538-8cbf-c189655c15bb"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "65b62r9",
+        "Id": "o15r6s5",
+        "Name": "TestChaosConfiglruxo",
+        "LocationUri": "hosted"
+    }
+}

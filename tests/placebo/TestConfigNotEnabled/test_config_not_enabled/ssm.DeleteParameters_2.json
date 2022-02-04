@@ -1,0 +1,22 @@
+{
+    "status_code": 200,
+    "data": {
+        "DeletedParameters": [
+            "test.configtiyak"
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "ae902089-e6e3-48ce-a1dd-8432d1021d58",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Tue, 28 Sep 2021 12:48:16 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "65",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "ae902089-e6e3-48ce-a1dd-8432d1021d58"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

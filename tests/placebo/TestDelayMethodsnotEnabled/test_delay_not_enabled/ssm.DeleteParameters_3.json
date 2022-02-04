@@ -1,0 +1,22 @@
+{
+    "status_code": 200,
+    "data": {
+        "DeletedParameters": [
+            "test.configeimty"
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "1eedcbbc-7482-4463-abf6-7b3d5052ca17",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Wed, 06 Oct 2021 07:10:05 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "65",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "1eedcbbc-7482-4463-abf6-7b3d5052ca17"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

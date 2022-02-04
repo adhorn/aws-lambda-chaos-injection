@@ -224,9 +224,9 @@ How to use::
     >>> get_config()
     {'delay': 500, 'is_enabled': True, 'error_code': 404, 'exception_msg': 'chaos', 'rate': 1, 'fault_type': 'latency'}
     """
-    param = SSMParameter(os.environ['CHAOS_PARAM'])
+    ssm_provider = SSMParameter(os.environ['CHAOS_PARAM'])
     try:
-        value = json.loads(param.value)
+        value = json.loads(ssm_provider.value)
         if not value["is_enabled"]:
             return 0
         LOGGER.info("SSMParameterStore configuration received")

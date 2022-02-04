@@ -1,0 +1,29 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "b1658822-f1d1-4336-9436-e3b157d50cf6",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:48:43 GMT",
+                "content-type": "application/json",
+                "content-length": "110",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "b1658822-f1d1-4336-9436-e3b157d50cf6",
+                "configuration-profile-id": "kf4jg1l",
+                "application-id": "wxn8ab5",
+                "version-number": "1"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "wxn8ab5",
+        "ConfigurationProfileId": "kf4jg1l",
+        "VersionNumber": "1",
+        "ContentType": "application/json",
+        "Content": {
+            "__class__": "StreamingBody",
+            "__module__": "botocore.response",
+            "body": "eyAiZGVsYXkiOiA0MDAsICJpc19lbmFibGVkIjogZmFsc2UsICJleGNlcHRpb25fbXNnIjogIlRoaXMgaXMgY2hhb3MiLCAicmF0ZSI6IDEsICJmYXVsdF90eXBlIjogInN0YXR1c19jb2RlIn0="
+        }
+    }
+}

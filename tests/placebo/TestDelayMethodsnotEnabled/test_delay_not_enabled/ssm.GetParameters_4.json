@@ -1,0 +1,39 @@
+{
+    "status_code": 200,
+    "data": {
+        "Parameters": [
+            {
+                "Name": "test.configtfwfr",
+                "Type": "String",
+                "Value": "{ \"delay\": 400, \"is_enabled\": false, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"fault_type\": \"latency\"}",
+                "Version": 1,
+                "LastModifiedDate": {
+                    "__class__": "datetime",
+                    "year": 2021,
+                    "month": 10,
+                    "day": 6,
+                    "hour": 10,
+                    "minute": 26,
+                    "second": 48,
+                    "microsecond": 301000
+                },
+                "ARN": "arn:aws:ssm:us-east-1:322549714802:parameter/test.configtfwfr",
+                "DataType": "text"
+            }
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "47aa09bd-d0e9-4609-b20e-e6a30ba991cd",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Wed, 06 Oct 2021 07:26:48 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "371",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "47aa09bd-d0e9-4609-b20e-e6a30ba991cd"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

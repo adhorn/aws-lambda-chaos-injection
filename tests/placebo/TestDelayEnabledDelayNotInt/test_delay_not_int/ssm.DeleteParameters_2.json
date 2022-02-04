@@ -1,0 +1,22 @@
+{
+    "status_code": 200,
+    "data": {
+        "DeletedParameters": [
+            "test.configermfb"
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "85cb3a97-ec1b-441f-bb47-43c39a551dbe",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Tue, 28 Sep 2021 12:47:52 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "65",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "85cb3a97-ec1b-441f-bb47-43c39a551dbe"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

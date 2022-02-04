@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "5f8f00ec-99c6-4368-982d-af456ddad349",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:47:53 GMT",
+                "content-type": "application/json",
+                "content-length": "168",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "5f8f00ec-99c6-4368-982d-af456ddad349"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "tye6cin",
+        "Id": "yn3va66",
+        "Name": "TestChaosConfigvkpsn",
+        "LocationUri": "hosted"
+    }
+}

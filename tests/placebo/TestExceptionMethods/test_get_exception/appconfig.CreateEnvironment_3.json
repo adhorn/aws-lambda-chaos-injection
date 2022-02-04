@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "d5640a3e-62bf-4691-aa9a-237153da442e",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:10:09 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "d5640a3e-62bf-4691-aa9a-237153da442e"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "ourzf03",
+        "Id": "2vsepk2",
+        "Name": "Testiknwv",
+        "State": "ReadyForDeployment"
+    }
+}

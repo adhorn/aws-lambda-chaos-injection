@@ -1,0 +1,22 @@
+{
+    "status_code": 200,
+    "data": {
+        "DeletedParameters": [
+            "test.configapkny"
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "89834f01-0f20-48f6-bbe3-c648e2ec4b0d",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Wed, 06 Oct 2021 07:11:05 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "65",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "89834f01-0f20-48f6-bbe3-c648e2ec4b0d"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

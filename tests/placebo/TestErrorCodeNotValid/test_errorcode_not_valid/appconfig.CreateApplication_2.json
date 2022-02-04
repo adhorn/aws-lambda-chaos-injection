@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "17808d6b-2791-41e5-8f7a-ec80aa6c52f8",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:48:47 GMT",
+                "content-type": "application/json",
+                "content-length": "67",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "17808d6b-2791-41e5-8f7a-ec80aa6c52f8"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "n06b0h3",
+        "Name": "Test-Chaos-Confignkvkm"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "765d9a1a-d3bf-4271-adf5-b92c9c61d589",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:10:46 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "765d9a1a-d3bf-4271-adf5-b92c9c61d589"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "kmgzj9t",
+        "Id": "cmdyyqd",
+        "Name": "Testopsgr",
+        "State": "ReadyForDeployment"
+    }
+}

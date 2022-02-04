@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "725ff137-8c09-4526-a278-0e03312105e8",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:10:57 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "725ff137-8c09-4526-a278-0e03312105e8"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "8bh85zt",
+        "Id": "6upbkpf",
+        "Name": "Testllbcd",
+        "State": "ReadyForDeployment"
+    }
+}

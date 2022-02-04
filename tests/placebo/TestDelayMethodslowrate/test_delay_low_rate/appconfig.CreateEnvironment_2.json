@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "b40c60f1-bb08-4673-aeee-052b8a3f6d88",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:47:33 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "b40c60f1-bb08-4673-aeee-052b8a3f6d88"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "tiolsph",
+        "Id": "sbuiqj0",
+        "Name": "Testomkwy",
+        "State": "ReadyForDeployment"
+    }
+}

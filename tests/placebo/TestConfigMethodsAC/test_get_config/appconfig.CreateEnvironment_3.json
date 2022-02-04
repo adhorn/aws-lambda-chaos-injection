@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "c5626a53-ef46-4925-b94b-712d1cd65838",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:10:34 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "c5626a53-ef46-4925-b94b-712d1cd65838"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "l1n2xin",
+        "Id": "ap3jvlq",
+        "Name": "Testmstvv",
+        "State": "ReadyForDeployment"
+    }
+}

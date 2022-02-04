@@ -1,0 +1,22 @@
+{
+    "status_code": 200,
+    "data": {
+        "DeletedParameters": [
+            "test.configcbnai"
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "5da304bd-83a8-4370-a762-6052e7dba9a0",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Wed, 06 Oct 2021 07:26:47 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "65",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "5da304bd-83a8-4370-a762-6052e7dba9a0"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

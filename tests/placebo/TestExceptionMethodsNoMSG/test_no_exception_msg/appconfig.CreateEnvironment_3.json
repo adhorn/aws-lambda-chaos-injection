@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "d65a31d0-67aa-49e1-adca-8eef8b7d7dc2",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:10:21 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "d65a31d0-67aa-49e1-adca-8eef8b7d7dc2"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "id31vk0",
+        "Id": "klxhv19",
+        "Name": "Testzgvxc",
+        "State": "ReadyForDeployment"
+    }
+}

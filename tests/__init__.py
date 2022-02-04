@@ -10,6 +10,7 @@ import time
 import random
 import string
 from ssm_cache import SSMParameter
+from aws_lambda_powertools.utilities import parameters
 
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -85,6 +86,7 @@ class TestBaseAppConfig(unittest.TestCase):
     PLACEBO_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'placebo'))
 
     def tearDown(self):
+        # parameters.AppConfigProvider(boto3_session=None)
 
         self.appconfig_client.delete_hosted_configuration_version(
             ApplicationId=self.appconfig_application_id,
@@ -178,6 +180,8 @@ class TestBaseAppConfig(unittest.TestCase):
             pill.playback()
 
         self.appconfig_client = session.client('appconfig')
+        parameters.AppConfigProvider(boto3_session=session)
+
         rsp = self.appconfig_client.create_application(
             Name=APPCONFIG_APPLICATION
         )
