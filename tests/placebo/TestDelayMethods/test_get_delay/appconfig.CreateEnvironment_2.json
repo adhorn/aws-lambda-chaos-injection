@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "9eabd942-ecee-447d-b903-86dd9a934660",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:47:25 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "9eabd942-ecee-447d-b903-86dd9a934660"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "3go2k8i",
+        "Id": "9hve3xh",
+        "Name": "Testkbdbm",
+        "State": "ReadyForDeployment"
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "status_code": 200,
+    "data": {
+        "Parameters": [
+            {
+                "Name": "test.configyezge",
+                "Type": "String",
+                "Value": "{ \"delay\": 200, \"is_enabled\": false, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.5, \"fault_type\": \"latency\"}",
+                "Version": 1,
+                "LastModifiedDate": {
+                    "__class__": "datetime",
+                    "year": 2021,
+                    "month": 9,
+                    "day": 28,
+                    "hour": 9,
+                    "minute": 30,
+                    "second": 39,
+                    "microsecond": 397000
+                },
+                "ARN": "arn:aws:ssm:us-east-1:322549714802:parameter/test.configyezge",
+                "DataType": "text"
+            }
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "60cf6828-7d5b-4415-84ec-5d0976b1cf0c",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Tue, 28 Sep 2021 06:30:39 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "373",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "60cf6828-7d5b-4415-84ec-5d0976b1cf0c"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

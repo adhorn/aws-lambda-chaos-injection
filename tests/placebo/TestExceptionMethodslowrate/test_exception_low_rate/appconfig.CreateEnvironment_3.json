@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "915cd3a3-2a58-4aca-9c73-869141be87de",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:10:13 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "915cd3a3-2a58-4aca-9c73-869141be87de"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "kyg9rpu",
+        "Id": "infrya3",
+        "Name": "Testmxfei",
+        "State": "ReadyForDeployment"
+    }
+}

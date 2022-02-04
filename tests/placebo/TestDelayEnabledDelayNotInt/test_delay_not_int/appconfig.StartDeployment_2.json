@@ -1,0 +1,73 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "9860ea13-8db3-47d6-b127-b23d2cc8bc01",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:47:43 GMT",
+                "content-type": "application/json",
+                "content-length": "772",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "9860ea13-8db3-47d6-b127-b23d2cc8bc01"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "b6kowm2",
+        "EnvironmentId": "ujdgomg",
+        "DeploymentStrategyId": "xion41j",
+        "ConfigurationProfileId": "rbl1ov9",
+        "DeploymentNumber": 1,
+        "ConfigurationName": "TestChaosConfigdgeis",
+        "ConfigurationLocationUri": "hosted",
+        "ConfigurationVersion": "1",
+        "DeploymentDurationInMinutes": 0,
+        "GrowthType": "EXPONENTIAL",
+        "GrowthFactor": 100.0,
+        "FinalBakeTimeInMinutes": 0,
+        "State": "COMPLETE",
+        "EventLog": [
+            {
+                "EventType": "DEPLOYMENT_COMPLETED",
+                "TriggeredBy": "APPCONFIG",
+                "Description": "Deployment completed instantly",
+                "OccurredAt": {
+                    "__class__": "datetime",
+                    "year": 2021,
+                    "month": 9,
+                    "day": 28,
+                    "hour": 12,
+                    "minute": 47,
+                    "second": 43,
+                    "microsecond": 322000
+                }
+            },
+            {
+                "EventType": "DEPLOYMENT_STARTED",
+                "TriggeredBy": "USER",
+                "Description": "Deployment started",
+                "OccurredAt": {
+                    "__class__": "datetime",
+                    "year": 2021,
+                    "month": 9,
+                    "day": 28,
+                    "hour": 12,
+                    "minute": 47,
+                    "second": 43,
+                    "microsecond": 322000
+                }
+            }
+        ],
+        "PercentageComplete": 100.0,
+        "StartedAt": {
+            "__class__": "datetime",
+            "year": 2021,
+            "month": 9,
+            "day": 28,
+            "hour": 12,
+            "minute": 47,
+            "second": 43,
+            "microsecond": 322000
+        }
+    }
+}

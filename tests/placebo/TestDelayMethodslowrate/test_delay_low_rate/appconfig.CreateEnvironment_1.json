@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "3d6c1e00-c756-4374-a74e-e3b135b143f5",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:29:51 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "3d6c1e00-c756-4374-a74e-e3b135b143f5"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "rafrsw6",
+        "Id": "jfpac1b",
+        "Name": "Testeaifb",
+        "State": "ReadyForDeployment"
+    }
+}

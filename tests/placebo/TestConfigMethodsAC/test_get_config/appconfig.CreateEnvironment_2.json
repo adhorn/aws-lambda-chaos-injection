@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "0e15b743-f643-4837-8673-9f38331a32d0",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:48:19 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "0e15b743-f643-4837-8673-9f38331a32d0"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "1khb657",
+        "Id": "764c78v",
+        "Name": "Testwszbx",
+        "State": "ReadyForDeployment"
+    }
+}

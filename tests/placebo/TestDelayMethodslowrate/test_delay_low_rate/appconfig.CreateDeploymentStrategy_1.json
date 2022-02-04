@@ -1,0 +1,25 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "8c115aa5-a838-4d4e-bb2f-b1d3716f2f90",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:29:52 GMT",
+                "content-type": "application/json",
+                "content-length": "183",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "8c115aa5-a838-4d4e-bb2f-b1d3716f2f90"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "31dnm8v",
+        "Name": "string",
+        "Description": "string",
+        "DeploymentDurationInMinutes": 0,
+        "GrowthType": "EXPONENTIAL",
+        "GrowthFactor": 100.0,
+        "FinalBakeTimeInMinutes": 0,
+        "ReplicateTo": "NONE"
+    }
+}

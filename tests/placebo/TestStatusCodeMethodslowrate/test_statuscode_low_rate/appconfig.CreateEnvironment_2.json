@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "16708000-05d3-4bf8-9535-18cbb8b1906d",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:48:33 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "16708000-05d3-4bf8-9535-18cbb8b1906d"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "2smbz8o",
+        "Id": "38p1r40",
+        "Name": "Testwmlyz",
+        "State": "ReadyForDeployment"
+    }
+}

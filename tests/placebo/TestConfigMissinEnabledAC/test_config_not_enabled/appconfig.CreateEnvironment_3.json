@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "3ebbd020-b930-47c4-afea-1bf26c0dca92",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:10:42 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "3ebbd020-b930-47c4-afea-1bf26c0dca92"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "p341huq",
+        "Id": "rnbb0d0",
+        "Name": "Testmqhdx",
+        "State": "ReadyForDeployment"
+    }
+}

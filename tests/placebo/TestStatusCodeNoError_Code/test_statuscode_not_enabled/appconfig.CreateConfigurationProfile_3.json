@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "27ec91eb-4785-4304-8140-502183012b73",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:10:57 GMT",
+                "content-type": "application/json",
+                "content-length": "168",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "27ec91eb-4785-4304-8140-502183012b73"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "8bh85zt",
+        "Id": "u1typ40",
+        "Name": "TestChaosConfigplbgk",
+        "LocationUri": "hosted"
+    }
+}

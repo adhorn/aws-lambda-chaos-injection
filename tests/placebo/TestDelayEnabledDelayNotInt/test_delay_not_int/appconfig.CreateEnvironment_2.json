@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "08fce7c6-3416-495c-b606-821b7ecb35b1",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:47:42 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "08fce7c6-3416-495c-b606-821b7ecb35b1"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "b6kowm2",
+        "Id": "ujdgomg",
+        "Name": "Testfqbta",
+        "State": "ReadyForDeployment"
+    }
+}

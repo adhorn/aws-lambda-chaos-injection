@@ -1,0 +1,39 @@
+{
+    "status_code": 200,
+    "data": {
+        "Parameters": [
+            {
+                "Name": "test.configicetu",
+                "Type": "String",
+                "Value": "{ \"delay\": 400, \"is_enabled\": false, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"fault_type\": \"status_code\"}",
+                "Version": 1,
+                "LastModifiedDate": {
+                    "__class__": "datetime",
+                    "year": 2021,
+                    "month": 10,
+                    "day": 6,
+                    "hour": 10,
+                    "minute": 11,
+                    "second": 8,
+                    "microsecond": 238000
+                },
+                "ARN": "arn:aws:ssm:us-east-1:322549714802:parameter/test.configicetu",
+                "DataType": "text"
+            }
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "b4c908ac-6b76-483e-846f-b7c4542987e4",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Wed, 06 Oct 2021 07:11:08 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "354",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "b4c908ac-6b76-483e-846f-b7c4542987e4"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

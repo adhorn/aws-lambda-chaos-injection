@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "45ebcea8-479d-48ad-b468-5c86e18da871",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:11:01 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "45ebcea8-479d-48ad-b468-5c86e18da871"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "szjsdo6",
+        "Id": "bwmisad",
+        "Name": "Testnxgvs",
+        "State": "ReadyForDeployment"
+    }
+}

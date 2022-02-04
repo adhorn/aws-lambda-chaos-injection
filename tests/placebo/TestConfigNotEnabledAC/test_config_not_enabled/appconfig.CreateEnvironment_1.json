@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "2382bdb0-bbdf-4e8c-8572-724dbe75be02",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:46 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "2382bdb0-bbdf-4e8c-8572-724dbe75be02"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "4tpbpej",
+        "Id": "nog8a70",
+        "Name": "Testdokhd",
+        "State": "ReadyForDeployment"
+    }
+}

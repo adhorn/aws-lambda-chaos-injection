@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "edfa4272-7926-4028-b37b-055f47aefbb2",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:46 GMT",
+                "content-type": "application/json",
+                "content-length": "67",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "edfa4272-7926-4028-b37b-055f47aefbb2"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "4tpbpej",
+        "Name": "Test-Chaos-Configitcap"
+    }
+}

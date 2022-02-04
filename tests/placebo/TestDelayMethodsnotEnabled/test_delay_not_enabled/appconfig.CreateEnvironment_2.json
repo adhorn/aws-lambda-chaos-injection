@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "aca404b8-b5da-43e4-bec1-398f452dc36d",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:47:29 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "aca404b8-b5da-43e4-bec1-398f452dc36d"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "65b62r9",
+        "Id": "3g5jmxf",
+        "Name": "Testwkzyt",
+        "State": "ReadyForDeployment"
+    }
+}

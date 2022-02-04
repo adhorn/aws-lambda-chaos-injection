@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "00f43e49-9f4b-43ec-aa09-5f23a875d175",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:48:22 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "00f43e49-9f4b-43ec-aa09-5f23a875d175"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "6vidkc7",
+        "Id": "fa4cyxb",
+        "Name": "Testemtak",
+        "State": "ReadyForDeployment"
+    }
+}

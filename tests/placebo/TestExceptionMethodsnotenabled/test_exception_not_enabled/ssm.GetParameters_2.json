@@ -1,0 +1,39 @@
+{
+    "status_code": 200,
+    "data": {
+        "Parameters": [
+            {
+                "Name": "test.configthbqr",
+                "Type": "String",
+                "Value": "{ \"delay\": 400, \"is_enabled\": false, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"fault_type\": \"exception\"}",
+                "Version": 1,
+                "LastModifiedDate": {
+                    "__class__": "datetime",
+                    "year": 2021,
+                    "month": 9,
+                    "day": 28,
+                    "hour": 15,
+                    "minute": 48,
+                    "second": 12,
+                    "microsecond": 257000
+                },
+                "ARN": "arn:aws:ssm:us-east-1:322549714802:parameter/test.configthbqr",
+                "DataType": "text"
+            }
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "844a3dca-132f-4dd5-8916-7152bf9a519a",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Tue, 28 Sep 2021 12:48:12 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "373",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "844a3dca-132f-4dd5-8916-7152bf9a519a"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

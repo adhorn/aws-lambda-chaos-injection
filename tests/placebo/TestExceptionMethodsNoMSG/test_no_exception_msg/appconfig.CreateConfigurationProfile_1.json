@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "201439d4-d529-44b0-b3a5-e26ecbacd1a1",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:27 GMT",
+                "content-type": "application/json",
+                "content-length": "168",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "201439d4-d529-44b0-b3a5-e26ecbacd1a1"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "vxb0taq",
+        "Id": "ap73zh6",
+        "Name": "TestChaosConfigqxalx",
+        "LocationUri": "hosted"
+    }
+}

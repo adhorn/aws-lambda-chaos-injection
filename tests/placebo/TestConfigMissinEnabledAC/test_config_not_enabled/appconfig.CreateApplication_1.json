@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "f65fc13a-1869-4afc-ab5b-050d1e6bbd80",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:52 GMT",
+                "content-type": "application/json",
+                "content-length": "67",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "f65fc13a-1869-4afc-ab5b-050d1e6bbd80"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "uzga1z7",
+        "Name": "Test-Chaos-Configqperq"
+    }
+}

@@ -3,35 +3,35 @@
     "data": {
         "Parameters": [
             {
-                "Name": "test.config",
+                "Name": "test.configjvbyh",
                 "Type": "String",
                 "Value": "{ \"delay\": 400, \"is_enabled\": false, \"exception_msg\": \"This is chaos\", \"rate\": 1, \"fault_type\": \"status_code\"}",
-                "Version": 860,
+                "Version": 1,
                 "LastModifiedDate": {
                     "__class__": "datetime",
                     "year": 2021,
                     "month": 9,
-                    "day": 8,
-                    "hour": 10,
-                    "minute": 0,
-                    "second": 2,
-                    "microsecond": 303000
+                    "day": 28,
+                    "hour": 9,
+                    "minute": 31,
+                    "second": 20,
+                    "microsecond": 257000
                 },
-                "ARN": "arn:aws:ssm:eu-west-1:322549714802:parameter/test.config",
+                "ARN": "arn:aws:ssm:us-east-1:322549714802:parameter/test.configjvbyh",
                 "DataType": "text"
             }
         ],
         "InvalidParameters": [],
         "ResponseMetadata": {
-            "RequestId": "9c979c50-3119-4915-aa04-994caa215571",
+            "RequestId": "b2456bb0-04f7-48dc-85c0-679fe7971e5b",
             "HTTPStatusCode": 200,
             "HTTPHeaders": {
                 "server": "Server",
-                "date": "Wed, 08 Sep 2021 07:00:02 GMT",
+                "date": "Tue, 28 Sep 2021 06:31:20 GMT",
                 "content-type": "application/x-amz-json-1.1",
-                "content-length": "346",
+                "content-length": "354",
                 "connection": "keep-alive",
-                "x-amzn-requestid": "9c979c50-3119-4915-aa04-994caa215571"
+                "x-amzn-requestid": "b2456bb0-04f7-48dc-85c0-679fe7971e5b"
             },
             "RetryAttempts": 0
         }

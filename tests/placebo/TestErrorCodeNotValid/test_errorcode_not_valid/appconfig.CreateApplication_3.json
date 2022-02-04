@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "1cd4ef18-4752-460a-ac19-bb7012a79037",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:11:01 GMT",
+                "content-type": "application/json",
+                "content-length": "67",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "1cd4ef18-4752-460a-ac19-bb7012a79037"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "szjsdo6",
+        "Name": "Test-Chaos-Configmzboh"
+    }
+}

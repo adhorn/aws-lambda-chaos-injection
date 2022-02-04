@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "0d8e8581-c356-4967-9473-fd44d1dc16e0",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:10:34 GMT",
+                "content-type": "application/json",
+                "content-length": "168",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "0d8e8581-c356-4967-9473-fd44d1dc16e0"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "l1n2xin",
+        "Id": "qpxvsod",
+        "Name": "TestChaosConfigphcrg",
+        "LocationUri": "hosted"
+    }
+}

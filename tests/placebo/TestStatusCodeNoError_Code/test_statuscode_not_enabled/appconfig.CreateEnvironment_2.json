@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "468e35a5-c730-4b8d-b479-8b0057742b10",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:48:42 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "468e35a5-c730-4b8d-b479-8b0057742b10"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "wxn8ab5",
+        "Id": "3mzu9me",
+        "Name": "Testluxfw",
+        "State": "ReadyForDeployment"
+    }
+}

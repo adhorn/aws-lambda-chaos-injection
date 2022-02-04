@@ -1,0 +1,25 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "a43d3421-96cf-4d64-b84b-d8701412185b",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:11:02 GMT",
+                "content-type": "application/json",
+                "content-length": "183",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "a43d3421-96cf-4d64-b84b-d8701412185b"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "jrshs8n",
+        "Name": "string",
+        "Description": "string",
+        "DeploymentDurationInMinutes": 0,
+        "GrowthType": "EXPONENTIAL",
+        "GrowthFactor": 100.0,
+        "FinalBakeTimeInMinutes": 0,
+        "ReplicateTo": "NONE"
+    }
+}

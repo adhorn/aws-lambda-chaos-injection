@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "4f2c7650-5af2-4998-ba41-5bdb62cbd6b3",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:48:26 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "4f2c7650-5af2-4998-ba41-5bdb62cbd6b3"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "valrq32",
+        "Id": "zraq648",
+        "Name": "Testtsojp",
+        "State": "ReadyForDeployment"
+    }
+}

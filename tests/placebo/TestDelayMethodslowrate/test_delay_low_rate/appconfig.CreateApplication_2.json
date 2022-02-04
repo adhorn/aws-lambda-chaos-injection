@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "97806077-4eed-4749-937a-67686279c123",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:47:32 GMT",
+                "content-type": "application/json",
+                "content-length": "67",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "97806077-4eed-4749-937a-67686279c123"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "tiolsph",
+        "Name": "Test-Chaos-Configpcjlm"
+    }
+}

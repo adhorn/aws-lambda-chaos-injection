@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "09f24af1-76b7-4415-acec-af6d265e39de",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:09:49 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "09f24af1-76b7-4415-acec-af6d265e39de"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "sdkpqw4",
+        "Id": "hn2jbyd",
+        "Name": "Testtoubo",
+        "State": "ReadyForDeployment"
+    }
+}

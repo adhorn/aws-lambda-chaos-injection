@@ -1,0 +1,39 @@
+{
+    "status_code": 200,
+    "data": {
+        "Parameters": [
+            {
+                "Name": "test.configkhgge",
+                "Type": "String",
+                "Value": "{ \"delay\": \"boo\", \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.000001, \"fault_type\": \"latency\"}",
+                "Version": 1,
+                "LastModifiedDate": {
+                    "__class__": "datetime",
+                    "year": 2021,
+                    "month": 10,
+                    "day": 6,
+                    "hour": 10,
+                    "minute": 26,
+                    "second": 52,
+                    "microsecond": 565000
+                },
+                "ARN": "arn:aws:ssm:us-east-1:322549714802:parameter/test.configkhgge",
+                "DataType": "text"
+            }
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "4a984498-1dd6-4883-a48d-fd12fe3dc608",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Wed, 06 Oct 2021 07:26:52 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "381",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "4a984498-1dd6-4883-a48d-fd12fe3dc608"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

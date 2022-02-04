@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "6848e7b5-16df-4d2c-8b01-b6a674d40d7e",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:48:29 GMT",
+                "content-type": "application/json",
+                "content-length": "67",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "6848e7b5-16df-4d2c-8b01-b6a674d40d7e"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "ex5tixh",
+        "Name": "Test-Chaos-Configxoxqd"
+    }
+}

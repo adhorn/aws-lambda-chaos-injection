@@ -1,18 +1,18 @@
 {
     "status_code": 200,
     "data": {
-        "Version": 858,
+        "Version": 1,
         "Tier": "Standard",
         "ResponseMetadata": {
-            "RequestId": "5743786c-5baf-4d0a-bec2-978463773465",
+            "RequestId": "d4420747-e026-40a4-809a-310d3b4c9d50",
             "HTTPStatusCode": 200,
             "HTTPHeaders": {
                 "server": "Server",
-                "date": "Wed, 08 Sep 2021 07:00:01 GMT",
+                "date": "Tue, 28 Sep 2021 06:31:17 GMT",
                 "content-type": "application/x-amz-json-1.1",
-                "content-length": "33",
+                "content-length": "31",
                 "connection": "keep-alive",
-                "x-amzn-requestid": "5743786c-5baf-4d0a-bec2-978463773465"
+                "x-amzn-requestid": "d4420747-e026-40a4-809a-310d3b4c9d50"
             },
             "RetryAttempts": 0
         }

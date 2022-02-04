@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "243b5b03-0ef6-45a5-a5bb-60969b7eb9d6",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:31:09 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "243b5b03-0ef6-45a5-a5bb-60969b7eb9d6"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "cgis17p",
+        "Id": "hb1tt7l",
+        "Name": "Testxugps",
+        "State": "ReadyForDeployment"
+    }
+}

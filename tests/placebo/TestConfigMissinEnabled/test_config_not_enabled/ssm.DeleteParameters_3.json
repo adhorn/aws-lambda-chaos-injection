@@ -1,0 +1,22 @@
+{
+    "status_code": 200,
+    "data": {
+        "DeletedParameters": [
+            "test.configzpaaz"
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "5ec9cde1-abdc-4032-941f-ff305e7c486b",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Wed, 06 Oct 2021 07:10:33 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "65",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "5ec9cde1-abdc-4032-941f-ff305e7c486b"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

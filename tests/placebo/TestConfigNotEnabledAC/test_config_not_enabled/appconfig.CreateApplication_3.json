@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "f5ccfd2b-645b-43b0-a6f9-5728aeeef6b7",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:10:37 GMT",
+                "content-type": "application/json",
+                "content-length": "67",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "f5ccfd2b-645b-43b0-a6f9-5728aeeef6b7"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "je7jtm7",
+        "Name": "Test-Chaos-Configzsvaw"
+    }
+}

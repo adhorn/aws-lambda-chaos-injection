@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "0d3eeb5f-66e3-4ee6-a35c-0e85e34681eb",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:10:53 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "0d3eeb5f-66e3-4ee6-a35c-0e85e34681eb"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "yf236bn",
+        "Id": "j6m67ej",
+        "Name": "Testtlchd",
+        "State": "ReadyForDeployment"
+    }
+}

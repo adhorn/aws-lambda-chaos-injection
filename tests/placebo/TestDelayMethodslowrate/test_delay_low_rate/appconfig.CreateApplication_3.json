@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "22e2f4ac-364e-4f68-b6c4-82e87564864e",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:09:52 GMT",
+                "content-type": "application/json",
+                "content-length": "67",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "22e2f4ac-364e-4f68-b6c4-82e87564864e"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "bvm91mh",
+        "Name": "Test-Chaos-Configsqcir"
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "status_code": 200,
+    "data": {
+        "Parameters": [
+            {
+                "Name": "test.configtiyak",
+                "Type": "String",
+                "Value": "{ \"delay\": 200, \"is_enabled\": false, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.5, \"fault_type\": \"latency\"}",
+                "Version": 1,
+                "LastModifiedDate": {
+                    "__class__": "datetime",
+                    "year": 2021,
+                    "month": 9,
+                    "day": 28,
+                    "hour": 15,
+                    "minute": 48,
+                    "second": 16,
+                    "microsecond": 409000
+                },
+                "ARN": "arn:aws:ssm:us-east-1:322549714802:parameter/test.configtiyak",
+                "DataType": "text"
+            }
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "c8c8a802-a8e7-4665-9a0f-355f7f8dd1d4",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Tue, 28 Sep 2021 12:48:16 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "373",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "c8c8a802-a8e7-4665-9a0f-355f7f8dd1d4"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

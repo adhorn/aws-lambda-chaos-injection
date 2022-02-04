@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "b6486646-1c93-4858-8cf4-0032886c1673",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:47:33 GMT",
+                "content-type": "application/json",
+                "content-length": "168",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "b6486646-1c93-4858-8cf4-0032886c1673"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "tiolsph",
+        "Id": "x9xc26a",
+        "Name": "TestChaosConfigkwyvg",
+        "LocationUri": "hosted"
+    }
+}

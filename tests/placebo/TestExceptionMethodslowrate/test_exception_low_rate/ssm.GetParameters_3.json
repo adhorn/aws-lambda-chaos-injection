@@ -1,0 +1,39 @@
+{
+    "status_code": 200,
+    "data": {
+        "Parameters": [
+            {
+                "Name": "test.configcusac",
+                "Type": "String",
+                "Value": "{ \"delay\": 400, \"is_enabled\": true, \"error_code\": 404, \"exception_msg\": \"This is chaos\", \"rate\": 0.0000001, \"fault_type\": \"exception\"}",
+                "Version": 1,
+                "LastModifiedDate": {
+                    "__class__": "datetime",
+                    "year": 2021,
+                    "month": 10,
+                    "day": 6,
+                    "hour": 10,
+                    "minute": 10,
+                    "second": 26,
+                    "microsecond": 207000
+                },
+                "ARN": "arn:aws:ssm:us-east-1:322549714802:parameter/test.configcusac",
+                "DataType": "text"
+            }
+        ],
+        "InvalidParameters": [],
+        "ResponseMetadata": {
+            "RequestId": "10b8cc2c-899e-4034-8779-2c040c47c7e6",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "server": "Server",
+                "date": "Wed, 06 Oct 2021 07:10:26 GMT",
+                "content-type": "application/x-amz-json-1.1",
+                "content-length": "380",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "10b8cc2c-899e-4034-8779-2c040c47c7e6"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

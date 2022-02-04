@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "2426c24e-d792-4506-ac58-017bc8459987",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:30:27 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "2426c24e-d792-4506-ac58-017bc8459987"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "vxb0taq",
+        "Id": "uu90xps",
+        "Name": "Testudzmn",
+        "State": "ReadyForDeployment"
+    }
+}

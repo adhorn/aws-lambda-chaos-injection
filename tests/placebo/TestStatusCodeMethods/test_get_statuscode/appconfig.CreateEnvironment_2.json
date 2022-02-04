@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "57ae9999-5f5a-41a8-a77b-10b81dfdb4ff",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 12:48:30 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "57ae9999-5f5a-41a8-a77b-10b81dfdb4ff"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "ex5tixh",
+        "Id": "nbllum1",
+        "Name": "Testxajql",
+        "State": "ReadyForDeployment"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "16188024-e4d0-41c8-a406-c8119b657023",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:31:01 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "16188024-e4d0-41c8-a406-c8119b657023"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "213d2qu",
+        "Id": "2h4ztwh",
+        "Name": "Testmxldi",
+        "State": "ReadyForDeployment"
+    }
+}

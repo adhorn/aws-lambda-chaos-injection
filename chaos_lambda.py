@@ -31,7 +31,7 @@ Chaos Injection for AWS Lambda - chaos_lambda
 
 ``chaos_lambda`` is a small library injecting chaos into `AWS Lambda
 <https://aws.amazon.com/lambda/>`_.
-It offers simple python decorators to do `delay`, `exception` and `statusCode` injection for your AWS Lambda function.
+It offers simple python decorators to do `latency`, `exception` and `statusCode` fault injection for your AWS Lambda function.
 This allows to conduct small chaos engineering experiments for your serverless application
 in the `AWS Cloud <https://aws.amazon.com>`_.
 
@@ -165,13 +165,52 @@ import random
 import json
 from ssm_cache import SSMParameter
 from ssm_cache.cache import InvalidParameterError
+from botocore.exceptions import ClientError
+from aws_lambda_powertools.utilities import parameters
+
 
 LOGGER = logging.getLogger(__name__)
 
 __version__ = '0.3'
 
 
-def get_config():
+def get_appconfig():
+    """
+Retrieve the full configuration from AppConfig
+The config returns a dictionary
+value: requested configuration
+
+How to use::
+
+    >>> import os
+    >>> from chaos_lambda import get_appconfig
+    >>> os.environ['APPCONFIG_APPLICATION'] = "MyConfiguration"
+    >>> os.environ['APPCONFIG_ENVIRONMENT'] = "MyEnv"
+    >>> os.environ['APPCONFIG_CONFIGURATION'] = "MyConfig"
+    >>> get_appconfig()
+    {'delay': 500, 'is_enabled': True, 'error_code': 404, 'exception_msg': 'This is chaos', 'rate': 1, 'fault_type': 'status_code'}
+    """
+
+    appconf_provider = parameters.AppConfigProvider(
+        environment=os.environ['APPCONFIG_ENVIRONMENT'],
+        application=os.environ['APPCONFIG_APPLICATION']
+    )
+    try:
+        appconf = json.loads(
+            appconf_provider.get(os.environ['APPCONFIG_CONFIGURATION']).decode('utf-8')
+        )
+        if not appconf["is_enabled"]:
+            return 0
+        LOGGER.info("AppConfig configuration received")
+
+        return appconf
+
+    except (KeyError, ClientError) as ex:
+        LOGGER.info("Chaos Injection configuration error - check the configuration is correct - " + repr(ex))
+        return 0
+
+
+def get_ssmconfig():
     """
 Retrieve the full configuration from the SSM parameter store
 The config returns a dictionary
@@ -185,15 +224,25 @@ How to use::
     >>> get_config()
     {'delay': 500, 'is_enabled': True, 'error_code': 404, 'exception_msg': 'chaos', 'rate': 1, 'fault_type': 'latency'}
     """
-    param = SSMParameter(os.environ['CHAOS_PARAM'])
+    ssm_provider = SSMParameter(os.environ['CHAOS_PARAM'])
     try:
-        value = json.loads(param.value)
+        value = json.loads(ssm_provider.value)
         if not value["is_enabled"]:
             return 0
+        LOGGER.info("SSMParameterStore configuration received")
         return value
-    except InvalidParameterError as ex:
-        # key does not exist in SSM
-        raise InvalidParameterError("{} is not a valid SSM config".format(ex))
+    except (KeyError, InvalidParameterError) as ex:
+        LOGGER.info("Chaos Injection configuration error - check the configuration is correct - " + repr(ex))
+        return 0
+
+
+def get_config():
+    if os.environ.get('APPCONFIG_CONFIGURATION'):
+        return get_appconfig()
+    elif os.environ.get('CHAOS_PARAM'):
+        return get_ssmconfig()
+    else:
+        return 0
 
 
 def inject_fault(func):

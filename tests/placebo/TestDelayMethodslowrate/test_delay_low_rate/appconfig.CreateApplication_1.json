@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "cb3dc616-9a2b-4b5d-a7dc-c9e38209c106",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Tue, 28 Sep 2021 06:29:51 GMT",
+                "content-type": "application/json",
+                "content-length": "67",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "cb3dc616-9a2b-4b5d-a7dc-c9e38209c106"
+            },
+            "RetryAttempts": 0
+        },
+        "Id": "rafrsw6",
+        "Name": "Test-Chaos-Configcidgw"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "status_code": 201,
+    "data": {
+        "ResponseMetadata": {
+            "RequestId": "15489683-6b9b-47c5-9a79-74aaa40759e9",
+            "HTTPStatusCode": 201,
+            "HTTPHeaders": {
+                "date": "Wed, 06 Oct 2021 07:09:59 GMT",
+                "content-type": "application/json",
+                "content-length": "125",
+                "connection": "keep-alive",
+                "x-amzn-requestid": "15489683-6b9b-47c5-9a79-74aaa40759e9"
+            },
+            "RetryAttempts": 0
+        },
+        "ApplicationId": "8bhgx63",
+        "Id": "0jh523s",
+        "Name": "Testopwux",
+        "State": "ReadyForDeployment"
+    }
+}
