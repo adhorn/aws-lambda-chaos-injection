@@ -166,7 +166,7 @@ import json
 from ssm_cache import SSMParameter
 from ssm_cache.cache import InvalidParameterError
 
-LOGGER = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 __version__ = '0.3'
 
@@ -189,7 +189,7 @@ How to use::
     try:
         value = json.loads(param.value)
         if not value["is_enabled"]:
-            return 0
+            return
         return value
     except InvalidParameterError as ex:
         # key does not exist in SSM
@@ -284,7 +284,7 @@ Usage::
         if not _chaos_conf:
             return func(*args, **kwargs)
 
-        LOGGER.info(
+        logger.info(
             "Got SSM configuration: %s",
             _chaos_conf
         )
@@ -296,10 +296,10 @@ Usage::
             if isinstance(_chaos_conf.get("delay"), int):
                 _delay = _chaos_conf.get("delay")
             else:
-                LOGGER.info("Parameter delay is no valid int")
+                logger.info("Parameter delay is no valid int")
                 return func(*args, **kwargs)
 
-            LOGGER.info(
+            logger.info(
                 "Injecting %d ms of delay with a rate of %s",
                 _delay, rate
             )
@@ -308,12 +308,12 @@ Usage::
             if _delay > 0 and rate >= 0:
                 # add latency approx rate% of the time
                 if round(random.random(), 5) <= rate:
-                    LOGGER.debug('sleeping now')
+                    logger.debug('sleeping now')
                     time.sleep(_delay / 1000.0)
 
             end = time.time()
 
-            LOGGER.debug(
+            logger.debug(
                 'Added %.2fms to %s',
                 (end - start) * 1000,
                 func.__name__
@@ -325,10 +325,10 @@ Usage::
             if isinstance(_chaos_conf.get("exception_msg"), str):
                 _exception_msg = _chaos_conf.get("exception_msg")
             else:
-                LOGGER.info("Parameter exception_msg is no valid string")
+                logger.info("Parameter exception_msg is no valid string")
                 return func(*args, **kwargs)
 
-            LOGGER.info(
+            logger.info(
                 "Injecting exception_type %s with message %s a rate of %d",
                 _exception_type,
                 _exception_msg,
@@ -337,7 +337,7 @@ Usage::
 
             # add injection approx rate% of the time
             if round(random.random(), 5) <= rate:
-                LOGGER.debug("corrupting now")
+                logger.debug("corrupting now")
                 raise _exception_type(_exception_msg)
 
         if _fault_type == "status_code":
@@ -345,13 +345,13 @@ Usage::
             if isinstance(_chaos_conf.get("error_code"), int):
                 _error_code = _chaos_conf.get("error_code")
             else:
-                LOGGER.info("Parameter error_code is no valid int")
+                logger.info("Parameter error_code is no valid int")
                 return func(*args, **kwargs)
 
-            LOGGER.info("Injecting Error %s at a rate of %d", _error_code, rate)
+            logger.info("Injecting Error %s at a rate of %d", _error_code, rate)
             # add injection approx rate% of the time
             if round(random.random(), 5) <= rate:
-                LOGGER.debug("corrupting now")
+                logger.debug("corrupting now")
                 result['statusCode'] = _error_code
                 return result
 

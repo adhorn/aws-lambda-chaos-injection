@@ -61,7 +61,7 @@ class TestConfigNotEnabled(TestBase):
         method_name = sys._getframe().f_code.co_name
         self._setTestUp(method_name)
         _config = get_config()
-        self.assertEqual(_config, 0)
+        self.assertEqual(_config, None)
 
 
 if __name__ == '__main__':
