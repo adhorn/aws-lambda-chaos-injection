@@ -22,7 +22,7 @@ Chaos Injection for AWS Lambda - chaos_lambda
 .. |Pypi| image:: https://badge.fury.io/py/chaos-lambda.svg
     :target: https://badge.fury.io/py/chaos-lambda
 
-.. |Travis| image:: https://api.travis-ci.org/adhorn/aws-lambda-chaos-injection.svg?branch=master
+.. |Travis| image:: https://api.travis-ci.com/adhorn/aws-lambda-chaos-injection.svg?branch=master
     :target: https://travis-ci.org/adhorn/aws-lambda-chaos-injection
 
 .. |Coveralls| image:: https://coveralls.io/repos/github/adhorn/aws-lambda-chaos-injection/badge.svg?branch=master
